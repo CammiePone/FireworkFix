@@ -11,7 +11,7 @@
 FireworkFix makes Firework Rockets calculate their damage linearly based on the number of Firework Stars.
 
 Vanilla Firework Damage Calculation looks like this:
-![img.png](img.png)
+<br>![img.png](./img.png)
 
 FireworkFix adjusts the base damage of Firework Rockets from 6 to 4, and then multiplies by the number of Firework Stars a Firework Rocket has, maxing the damage out at 28.
 
