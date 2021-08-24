@@ -11,7 +11,7 @@ public class FireworkFixConfig implements ConfigData {
 	public float baseDamage = 4F;
 
 	@Comment("Multiplier for Rocket Jump Velocity")
-	public double rocketJumpMultiplier = 1F;
+	public double rocketJumpMultiplier = 1.5F;
 
 	@Comment("Should item display damage of Firework Rockets?")
 	public boolean showTooltip = true;
@@ -20,5 +20,5 @@ public class FireworkFixConfig implements ConfigData {
 	public boolean onlyAffectCrossbows = true;
 
 	@Comment("Should players be able to Rocket Jump?")
-	public boolean allowRocketJumping = true;
+	public boolean allowRocketJumping = false;
 }

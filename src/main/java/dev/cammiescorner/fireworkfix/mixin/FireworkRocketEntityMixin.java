@@ -33,7 +33,7 @@ public abstract class FireworkRocketEntityMixin extends Entity implements Flying
 	public void explode(CallbackInfo info, float damage, double d, Vec3d pos, List list, Iterator iterator, LivingEntity entity) {
 		if(FireworkFix.config.allowRocketJumping) {
 			Vec3d vec3d = new Vec3d(entity.getX(), entity.getEyeY(), entity.getZ());
-			double inverseDistance = getPos().distanceTo(vec3d) != 0 ? (1 / getPos().distanceTo(vec3d)) * 1.5 : 1;
+			double inverseDistance = getPos().distanceTo(vec3d) != 0 ? 1 / getPos().distanceTo(vec3d) : 1;
 
 			entity.setVelocity(getVelocity().multiply(-inverseDistance * FireworkFix.config.rocketJumpMultiplier));
 			entity.velocityModified = true;
