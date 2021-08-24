@@ -1,0 +1,6 @@
+{
+	"item.minecraft.firework_rocket.damage": "Damage:",
+	"text.autoconfig.fireworkfix.title": "FireworkFix",
+	"text.autoconfig.fireworkfix.option.baseDamage": "Base damage of Firework Rockets.",
+	"text.autoconfig.fireworkfix.option.showTooltip": "Should item display damage of Firework Rockets?"
+}

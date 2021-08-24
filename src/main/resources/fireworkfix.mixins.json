@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "dev.cammiescorner.fireworkfix.mixin",
+	"compatibilityLevel": "JAVA_16",
+	"mixins": [
+		"FireworkRocketEntityMixin",
+		"FireworkRocketItemMixin"
+	],
+	"client": [
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

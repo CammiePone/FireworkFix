@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "fireworkfix",
+	"version": "${version}",
+	"name": "FireworkFix",
+	"description": "Fixes Firework Rocket damage so it scales linearly with Firework Star count.",
+	"authors": ["Cammie"],
+	"contact": {},
+	"license": "MIT",
+	"icon": "assets/fireworkfix/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.cammiescorner.fireworkfix.FireworkFix"
+		],
+		"modmenu": [
+			"dev.cammiescorner.fireworkfix.integration.FireworkFixModMenu"
+		]
+	},
+	"mixins": [
+		"fireworkfix.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.11.6",
+		"fabric": "*",
+		"minecraft": "1.17.1"
+	}
+}
