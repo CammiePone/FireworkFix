@@ -10,12 +10,20 @@
 
 FireworkFix makes Firework Rockets calculate their damage linearly based on the number of Firework Stars.
 
-Vanilla Firework Damage Calculation looks like this:
-<br>![img.png](./img.png)
-
-FireworkFix adjusts the base damage of Firework Rockets from 6 to 4, and then multiplies by the number of Firework Stars a Firework Rocket has, maxing the damage out at 28.
-
 Every part of the mod is configurable.
+
+**Damage Table:**
+
+| Firework Stars | Vanilla Damage | FireworkFix Damage |
+| :------------: | :------------: | :----------------: |
+| 0              | 0              | 0                  |
+| 1              | 6              | 4                  |
+| 2              | 8              | 8                  |
+| 3              | 10             | 12                 |
+| 4              | 12             | 16                 |
+| 5              | 14             | 20                 |
+| 6              | 16             | 24                 |
+| 7              | 17             | 28                 |
 
 ---
 
