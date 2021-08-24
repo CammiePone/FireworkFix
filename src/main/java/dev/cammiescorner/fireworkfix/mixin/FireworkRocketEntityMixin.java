@@ -4,6 +4,7 @@ import dev.cammiescorner.fireworkfix.FireworkFix;
 import net.minecraft.entity.*;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -20,24 +21,33 @@ import java.util.Iterator;
 import java.util.List;
 
 @Mixin(FireworkRocketEntity.class)
-public abstract class FireworkRocketEntityMixin extends Entity implements FlyingItemEntity {
+public abstract class FireworkRocketEntityMixin extends ProjectileEntity implements FlyingItemEntity {
 	@Shadow @Final private static TrackedData<ItemStack> ITEM;
 
 	@Shadow protected abstract boolean hasExplosionEffects();
 
-	public FireworkRocketEntityMixin(EntityType<?> type, World world) {
-		super(type, world);
+	public FireworkRocketEntityMixin(EntityType<? extends ProjectileEntity> type, World world) { super(type, world); }
+
+	@Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 1), locals = LocalCapture.CAPTURE_FAILSOFT)
+	public void explodePreDamage(CallbackInfo info, float damage, double d, Vec3d pos, List list, Iterator iterator, LivingEntity entity) {
+		if(entity == getOwner())
+			entity.hurtTime = FireworkFix.config.selfDamageInvincibilityTicks;
 	}
 
 	@Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 1), locals = LocalCapture.CAPTURE_FAILSOFT)
-	public void explode(CallbackInfo info, float damage, double d, Vec3d pos, List list, Iterator iterator, LivingEntity entity) {
-		if(FireworkFix.config.allowRocketJumping) {
+	public void explodePostDamage(CallbackInfo info, float damage, double d, Vec3d pos, List list, Iterator iterator, LivingEntity entity) {
+		if(FireworkFix.config.allowRocketJumping && hasExplosionEffects()) {
 			Vec3d vec3d = new Vec3d(entity.getX(), entity.getEyeY(), entity.getZ());
 			double inverseDistance = getPos().distanceTo(vec3d) != 0 ? 1 / getPos().distanceTo(vec3d) : 1;
+			double multiplier = (dataTracker.get(ITEM).getSubNbt("Fireworks").getList("Explosions", 10).size() / 3.5D) * FireworkFix.config.rocketJumpMultiplier;
 
-			entity.setVelocity(getVelocity().multiply(-inverseDistance * FireworkFix.config.rocketJumpMultiplier));
+			entity.knockbackVelocity = 0F;
+			entity.setVelocity(getVelocity().multiply(-inverseDistance * multiplier));
 			entity.velocityModified = true;
 		}
+
+		if(entity == getOwner())
+			entity.hurtTime = FireworkFix.config.selfDamageInvincibilityTicks;
 	}
 
 	@ModifyArg(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 0))

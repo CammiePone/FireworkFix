@@ -20,6 +20,7 @@
 	"mixins": [
 		"fireworkfix.mixins.json"
 	],
+	"accessWidener": "META-INF/fireworkfix.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.11.6",
 		"fabric": "*",

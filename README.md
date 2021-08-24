@@ -8,22 +8,36 @@
 
 ---
 
-FireworkFix makes Firework Rockets calculate their damage linearly based on the number of Firework Stars.
+FireworkFix aims to make Firework Rockets more viable in PvP by changing how they work in-game.
 
-Every part of the mod is configurable.
+<details>
+    <summary>All Changes Made to Firework Rockets</summary>
+
+---
+- Self-damage no longer gives invincibility frames
+- Damage now scales linearly with the number of Firework Stars
+  - Base-damage of Firework Rockets reduced from 6 to 4
+  - Tooltip displays maximum damage of Firework Rocket
+  - Does not affect Firework Rockets used for Elytra Flight
+- Rocket Jumping exists
+  - Knockback based on Firework Stars in Firework Rocket
 
 **Damage Table:**
 
-| Firework Stars | Vanilla Damage | FireworkFix Damage |
-| :------------: | :------------: | :----------------: |
-| 0              | 0              | 0                  |
-| 1              | 6              | 4                  |
-| 2              | 8              | 8                  |
-| 3              | 10             | 12                 |
-| 4              | 12             | 16                 |
-| 5              | 14             | 20                 |
-| 6              | 16             | 24                 |
-| 7              | 17             | 28                 |
+| Firework Stars | Vanilla Damage | FireworkFix Damage* |
+| :------------: | :------------: | :-----------------: |
+| 0              | 0.0            | 0.0                 |
+| 1              | 6.0            | 4.0                 |
+| 2              | 8.0            | 8.0                 |
+| 3              | 10.0           | 12.0                |
+| 4              | 12.0           | 16.0                |
+| 5              | 14.0           | 20.0                |
+| 6              | 16.0           | 24.0                |
+| 7              | 17.0           | 28.0                |
+---
+</details>
+
+Every part of the mod is configurable in-game with ModMenu.
 
 ---
 

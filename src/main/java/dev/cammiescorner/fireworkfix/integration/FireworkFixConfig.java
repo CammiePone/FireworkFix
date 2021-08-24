@@ -7,18 +7,22 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 @Config(name = FireworkFix.MOD_ID)
 public class FireworkFixConfig implements ConfigData {
+	@Comment("Number of Invincibility Ticks when a player hits themselves" +
+			"\n    with a Firework Rocket? (Vanilla: 10)")
+	public int selfDamageInvincibilityTicks = 0;
+
 	@Comment("Base damage of Firework Rockets.")
 	public float baseDamage = 4F;
 
-	@Comment("Multiplier for Rocket Jump Velocity")
-	public double rocketJumpMultiplier = 1.5F;
+	@Comment("Multiplier for Rocket Jump Velocity.")
+	public double rocketJumpMultiplier = 1F;
 
 	@Comment("Should item display damage of Firework Rockets?")
 	public boolean showTooltip = true;
 
-	@Comment("Should damage scaling only affect crossbows?")
+	@Comment("Should damage scaling only affect Crossbows?")
 	public boolean onlyAffectCrossbows = true;
 
-	@Comment("Should players be able to Rocket Jump?")
+	@Comment("Should players be able to Rocket Jump? (Experimental)")
 	public boolean allowRocketJumping = false;
 }
