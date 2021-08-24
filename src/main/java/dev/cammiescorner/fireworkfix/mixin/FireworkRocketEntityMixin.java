@@ -35,15 +35,19 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 	}
 
 	@Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 1), locals = LocalCapture.CAPTURE_FAILSOFT)
-	public void explodePostDamage(CallbackInfo info, float damage, double d, Vec3d pos, List list, Iterator iterator, LivingEntity entity) {
+	public void explodePostDamage(CallbackInfo info, float damage, double d, Vec3d pos, List<LivingEntity> list, Iterator<LivingEntity> iterator, LivingEntity entity) {
 		if(FireworkFix.config.allowRocketJumping && hasExplosionEffects()) {
-			Vec3d vec3d = new Vec3d(entity.getX(), entity.getEyeY(), entity.getZ());
-			double inverseDistance = getPos().distanceTo(vec3d) != 0 ? 1 / getPos().distanceTo(vec3d) : 1;
-			double multiplier = (dataTracker.get(ITEM).getSubNbt("Fireworks").getList("Explosions", 10).size() / 3.5D) * FireworkFix.config.rocketJumpMultiplier;
+			for(LivingEntity target : list) {
+				Vec3d targetPos = new Vec3d(target.getX(), target.getY() + (target.getHeight() / 2), target.getZ());
+				Vec3d velocityDirection = new Vec3d(target.getX() - getX(), targetPos.getY() - getY(), target.getZ() - getZ());
+				double inverseDistance = getPos().distanceTo(targetPos) != 0 ? 1 / getPos().distanceTo(targetPos) : 1;
+				double multiplier = (dataTracker.get(ITEM).getSubNbt("Fireworks").getList("Explosions", 10).size() / 5D) * FireworkFix.config.rocketJumpMultiplier;
 
-			entity.knockbackVelocity = 0F;
-			entity.setVelocity(getVelocity().multiply(-inverseDistance * multiplier));
-			entity.velocityModified = true;
+				target.knockbackVelocity = 0F;
+				target.setVelocity(target.getVelocity().getX(), Math.abs(target.getVelocity().getY()), target.getVelocity().getZ());
+				target.setVelocity(target.getVelocity().add(velocityDirection).multiply(inverseDistance * multiplier));
+				target.velocityModified = true;
+			}
 		}
 
 		if(entity == getOwner())
