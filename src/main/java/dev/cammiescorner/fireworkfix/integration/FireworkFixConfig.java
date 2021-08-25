@@ -18,7 +18,7 @@ public class FireworkFixConfig implements ConfigData {
 	public double rocketJumpMultiplier = 1D;
 
 	@Comment("Multiplier for other entity's Firework Rocket Knockback")
-	public double otherEntityKnockback = 0.333D;
+	public double otherEntityKnockback = 0.5D;
 
 	@Comment("Should item display damage of Firework Rockets?")
 	public boolean showTooltip = true;
@@ -26,6 +26,6 @@ public class FireworkFixConfig implements ConfigData {
 	@Comment("Should damage scaling only affect Crossbows?")
 	public boolean onlyAffectCrossbows = true;
 
-	@Comment("Should players be able to Rocket Jump? (Experimental)")
-	public boolean allowRocketJumping = false;
+	@Comment("Should players be able to Rocket Jump?")
+	public boolean allowRocketJumping = true;
 }
