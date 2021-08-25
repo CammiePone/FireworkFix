@@ -5,6 +5,7 @@
 	"text.autoconfig.fireworkfix.option.selfDamageInvincibilityTicks": "Self-Damage Invincibility Ticks",
 	"text.autoconfig.fireworkfix.option.baseDamage": "Base Firework Rocket Damage",
 	"text.autoconfig.fireworkfix.option.rocketJumpMultiplier": "Rocket Jump Multiplier",
+	"text.autoconfig.fireworkfix.option.otherEntityKnockback": "Other Entity Knockback Multiplier",
 	"text.autoconfig.fireworkfix.option.showTooltip": "Show Damage Tooltip",
 	"text.autoconfig.fireworkfix.option.onlyAffectCrossbows": "Only Affect Crossbows",
 	"text.autoconfig.fireworkfix.option.allowRocketJumping": "Allow Rocket Jumping"

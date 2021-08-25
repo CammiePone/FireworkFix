@@ -53,7 +53,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 
 					target.knockbackVelocity = 0F;
 					target.setVelocity(target.getVelocity().getX(), Math.min(1D, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());
-					target.setVelocity(target.getVelocity().add(velocityDirection).multiply(inverseDistance * multiplier));
+					target.setVelocity(target.getVelocity().add(velocityDirection).multiply(inverseDistance * (target == getOwner() ? multiplier : multiplier * FireworkFix.config.otherEntityKnockback)));
 					target.velocityModified = true;
 				}
 			}

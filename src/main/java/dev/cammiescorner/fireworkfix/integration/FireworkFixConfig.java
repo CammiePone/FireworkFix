@@ -15,7 +15,10 @@ public class FireworkFixConfig implements ConfigData {
 	public float baseDamage = 4F;
 
 	@Comment("Multiplier for Rocket Jump Velocity.")
-	public double rocketJumpMultiplier = 1F;
+	public double rocketJumpMultiplier = 1D;
+
+	@Comment("Multiplier for other entity's Firework Rocket Knockback")
+	public double otherEntityKnockback = 0.333D;
 
 	@Comment("Should item display damage of Firework Rockets?")
 	public boolean showTooltip = true;
