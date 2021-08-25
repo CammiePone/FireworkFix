@@ -1,7 +1,10 @@
 package dev.cammiescorner.fireworkfix.mixin;
 
 import dev.cammiescorner.fireworkfix.FireworkFix;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.FlyingItemEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -42,16 +45,17 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 			float radius = (float) (box.getXLength() / 2);
 			double multiplier = (dataTracker.get(ITEM).getSubNbt("Fireworks").getList("Explosions", 10).size() / 4.5D) * FireworkFix.config.rocketJumpMultiplier;
 
-
 			for(LivingEntity target : list) {
-				Vec3d targetPos = new Vec3d(target.getX(), target.getY() + (target.getHeight() / 2), target.getZ());
-				Vec3d velocityDirection = new Vec3d(target.getX() - getX(), targetPos.getY() - getY(), target.getZ() - getZ());
-				double inverseDistance = 1 - (velocityDirection.length() / radius);
+				if(!target.blockedByShield(DamageSource.firework((FireworkRocketEntity) (Object) this, getOwner()))) {
+					Vec3d targetPos = new Vec3d(target.getX(), target.getY() + (target.getHeight() / 2), target.getZ());
+					Vec3d velocityDirection = new Vec3d(target.getX() - getX(), targetPos.getY() - getY(), target.getZ() - getZ());
+					double inverseDistance = 1 - (velocityDirection.length() / radius);
 
-				target.knockbackVelocity = 0F;
-				target.setVelocity(target.getVelocity().getX(), Math.min(1D, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());
-				target.setVelocity(target.getVelocity().add(velocityDirection).multiply(inverseDistance * multiplier));
-				target.velocityModified = true;
+					target.knockbackVelocity = 0F;
+					target.setVelocity(target.getVelocity().getX(), Math.min(1D, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());
+					target.setVelocity(target.getVelocity().add(velocityDirection).multiply(inverseDistance * multiplier));
+					target.velocityModified = true;
+				}
 			}
 		}
 
