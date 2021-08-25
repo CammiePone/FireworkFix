@@ -6,6 +6,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -37,14 +38,18 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 	@Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 1), locals = LocalCapture.CAPTURE_FAILSOFT)
 	public void explodePostDamage(CallbackInfo info, float damage, double d, Vec3d pos, List<LivingEntity> list, Iterator<LivingEntity> iterator, LivingEntity entity) {
 		if(FireworkFix.config.allowRocketJumping && hasExplosionEffects()) {
+			Box box = new Box(getX() - 5, getY() - 5, getZ() - 5, getX() + 5, getY() + 5, getZ() + 5);
+			float radius = (float) (box.getXLength() / 2);
+			double multiplier = (dataTracker.get(ITEM).getSubNbt("Fireworks").getList("Explosions", 10).size() / 4.5D) * FireworkFix.config.rocketJumpMultiplier;
+
+
 			for(LivingEntity target : list) {
 				Vec3d targetPos = new Vec3d(target.getX(), target.getY() + (target.getHeight() / 2), target.getZ());
 				Vec3d velocityDirection = new Vec3d(target.getX() - getX(), targetPos.getY() - getY(), target.getZ() - getZ());
-				double inverseDistance = getPos().distanceTo(targetPos) != 0 ? 1 / getPos().distanceTo(targetPos) : 1;
-				double multiplier = (dataTracker.get(ITEM).getSubNbt("Fireworks").getList("Explosions", 10).size() / 5D) * FireworkFix.config.rocketJumpMultiplier;
+				double inverseDistance = 1 - (velocityDirection.length() / radius);
 
 				target.knockbackVelocity = 0F;
-				target.setVelocity(target.getVelocity().getX(), Math.abs(target.getVelocity().getY()), target.getVelocity().getZ());
+				target.setVelocity(target.getVelocity().getX(), Math.min(1D, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());
 				target.setVelocity(target.getVelocity().add(velocityDirection).multiply(inverseDistance * multiplier));
 				target.velocityModified = true;
 			}
