@@ -50,4 +50,7 @@ public class FireworkFrenzyConfig implements ConfigData {
 
 	@Comment("Should Crossbows get Infinity?")
 	public boolean crossbowsGetInfinity = true;
+
+	@Comment("Should Infinity work on Firework Rockets?")
+	public boolean infinityAffectsRockets = true;
 }

@@ -85,7 +85,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 
 	@ModifyArg(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 1))
 	public float crossbowDamage(DamageSource source, float amount) {
-		if(target == getOwner() && target.getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.GUNBOATS))
+		if(FireworkFrenzy.config.enableGunboats && target == getOwner() && target.getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.GUNBOATS))
 			return 0;
 
 		if(hasExplosionEffects())

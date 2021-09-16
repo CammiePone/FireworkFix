@@ -14,5 +14,6 @@
 	"text.autoconfig.fireworkfrenzy.option.useRocketsFromInv": "Use Firework Rockets From Inventory",
 	"text.autoconfig.fireworkfrenzy.option.elytrasCancelRocketJumping": "Elytras Cancel Rocket Jumping",
 	"text.autoconfig.fireworkfrenzy.option.boostsCancelRocketJumping": "Rocket Boosts Cancel Rocket Jumping",
-	"text.autoconfig.fireworkfrenzy.option.crossbowsGetInfinity": "Crossbows Can Have Infinity"
+	"text.autoconfig.fireworkfrenzy.option.crossbowsGetInfinity": "Crossbows Can Have Infinity",
+	"text.autoconfig.fireworkfrenzy.option.infinityAffectsRockets": "Infinity Works on Firework Rockets"
 }

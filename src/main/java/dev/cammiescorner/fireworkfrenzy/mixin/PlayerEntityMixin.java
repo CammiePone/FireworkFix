@@ -32,12 +32,14 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 			if(isOnGround() || (isTouchingWater() && age % 60 == 0) || (FireworkFrenzy.config.elytrasCancelRocketJumping && isFallFlying()))
 				setBlastJumping(false);
 
-			if(getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.GUNBOATS)) {
-				flyingSpeed = 0.06F;
-				fallDistance = 0F;
+			if(FireworkFrenzy.config.enableGunboats) {
+				if(getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.GUNBOATS)) {
+					flyingSpeed = 0.06F;
+					fallDistance = 0F;
+				}
+				else
+					flyingSpeed = 0.02F;
 			}
-			else
-				flyingSpeed = 0.02F;
 		}
 	}
 
@@ -48,6 +50,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 
 	@ModifyVariable(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getAttackCooldownProgress(F)F", ordinal = 0), ordinal = 0)
 	public float attackDamage(float damage, Entity target) {
+		if(!FireworkFrenzy.config.enableMemeSpoon)
+			return damage;
+
 		boolean isCrit = getAttackCooldownProgress(0.5F) > 0.9F && this.fallDistance > 0.0F && !this.onGround && !this.isClimbing() && !this.isTouchingWater() && !this.hasStatusEffect(StatusEffects.BLINDNESS) && !this.hasVehicle() && target instanceof LivingEntity && !this.isSprinting();
 
 		return isBlastJumping() && getMainHandStack().isOf(ModItems.MEME_SPOON) ? damage * (isCrit ? 2 : 3) : damage;
