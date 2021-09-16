@@ -1,0 +1,19 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "dev.cammiescorner.fireworkfrenzy.mixin",
+	"compatibilityLevel": "JAVA_16",
+	"mixins": [
+		"CrossbowItemMixin",
+		"FireworkRocketEntityMixin",
+		"FireworkRocketItemMixin",
+		"InfinityEnchantmentMixin",
+		"PlayerEntityMixin"
+	],
+	"client": [
+		"client.ClientPlayerEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

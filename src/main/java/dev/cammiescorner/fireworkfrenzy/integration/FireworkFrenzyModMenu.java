@@ -1,12 +1,12 @@
-package dev.cammiescorner.fireworkfix.integration;
+package dev.cammiescorner.fireworkfrenzy.integration;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;
 
-public class FireworkFixModMenu implements ModMenuApi {
+public class FireworkFrenzyModMenu implements ModMenuApi {
 	@Override
 	public ConfigScreenFactory<?> getModConfigScreenFactory() {
-		return parent -> AutoConfig.getConfigScreen(FireworkFixConfig.class, parent).get();
+		return parent -> AutoConfig.getConfigScreen(FireworkFrenzyConfig.class, parent).get();
 	}
 }

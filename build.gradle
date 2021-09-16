@@ -25,7 +25,7 @@ dependencies {
 }
 
 loom {
-    accessWidenerPath.set(project.file("src/main/resources/META-INF/fireworkfix.accesswidener"))
+    accessWidenerPath.set(project.file("src/main/resources/META-INF/fireworkfrenzy.accesswidener"))
 }
 
 processResources {

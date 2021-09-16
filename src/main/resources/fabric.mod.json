@@ -1,26 +1,26 @@
 {
 	"schemaVersion": 1,
-	"id": "fireworkfix",
+	"id": "fireworkfrenzy",
 	"version": "${version}",
-	"name": "FireworkFix",
-	"description": "Fixes Firework Rocket damage so it scales linearly with Firework Star count.",
+	"name": "Firework Frenzy",
+	"description": "An overhaul to Firework Rockets and how the Crossbow makes use of them.",
 	"authors": ["Cammie"],
 	"contact": {},
 	"license": "MIT",
-	"icon": "assets/fireworkfix/icon.png",
+	"icon": "assets/fireworkfrenzy/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"dev.cammiescorner.fireworkfix.FireworkFix"
+			"dev.cammiescorner.fireworkfrenzy.FireworkFrenzy"
 		],
 		"modmenu": [
-			"dev.cammiescorner.fireworkfix.integration.FireworkFixModMenu"
+			"dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyModMenu"
 		]
 	},
 	"mixins": [
-		"fireworkfix.mixins.json"
+		"fireworkfrenzy.mixins.json"
 	],
-	"accessWidener": "META-INF/fireworkfix.accesswidener",
+	"accessWidener": "META-INF/fireworkfrenzy.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.11.6",
 		"fabric": "*",

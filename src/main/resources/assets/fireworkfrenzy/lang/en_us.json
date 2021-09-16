@@ -1,0 +1,18 @@
+{
+	"item.minecraft.firework_rocket.damage": "Damage:",
+
+	"text.autoconfig.fireworkfrenzy.title": "Firework Frenzy",
+	"text.autoconfig.fireworkfrenzy.option.selfDamageInvincibilityTicks": "Self-Damage Invincibility Ticks",
+	"text.autoconfig.fireworkfrenzy.option.baseDamage": "Base Firework Rocket Damage",
+	"text.autoconfig.fireworkfrenzy.option.rocketJumpMultiplier": "Rocket Jump Multiplier",
+	"text.autoconfig.fireworkfrenzy.option.otherEntityKnockback": "Other Entity Knockback Multiplier",
+	"text.autoconfig.fireworkfrenzy.option.showTooltip": "Show Damage Tooltip",
+	"text.autoconfig.fireworkfrenzy.option.onlyAffectCrossbows": "Only Affect Crossbows",
+	"text.autoconfig.fireworkfrenzy.option.allowRocketJumping": "Allow Rocket Jumping",
+	"text.autoconfig.fireworkfrenzy.option.enableMemeSpoon": "Enable Funni Shovel",
+	"text.autoconfig.fireworkfrenzy.option.enableGunboats": "Enable Funni Shoes",
+	"text.autoconfig.fireworkfrenzy.option.useRocketsFromInv": "Use Firework Rockets From Inventory",
+	"text.autoconfig.fireworkfrenzy.option.elytrasCancelRocketJumping": "Elytras Cancel Rocket Jumping",
+	"text.autoconfig.fireworkfrenzy.option.boostsCancelRocketJumping": "Rocket Boosts Cancel Rocket Jumping",
+	"text.autoconfig.fireworkfrenzy.option.crossbowsGetInfinity": "Crossbows Can Have Infinity"
+}
