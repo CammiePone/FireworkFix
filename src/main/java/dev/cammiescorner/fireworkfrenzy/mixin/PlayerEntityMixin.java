@@ -1,8 +1,10 @@
 package dev.cammiescorner.fireworkfrenzy.mixin;
 
+import dev.cammiescorner.asa.AirStrafingAttribute;
 import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
-import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
 import dev.cammiescorner.fireworkfrenzy.registry.ModItems;
+import dev.cammiescorner.fireworkfrenzy.util.AttributeModifiers;
+import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -28,17 +30,17 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 
 	@Inject(method = "tick", at = @At("TAIL"))
 	public void tick(CallbackInfo info) {
+		getAttributeInstance(AirStrafingAttribute.AIR_STRAFING_SPEED).removeModifier(AttributeModifiers.GUNBOATS);
+
 		if(isBlastJumping()) {
 			if(isOnGround() || hasVehicle() || (isTouchingWater() && age % 60 == 0) || (FireworkFrenzy.config.elytrasCancelRocketJumping && isFallFlying()))
 				setBlastJumping(false);
 
 			if(FireworkFrenzy.config.enableGunboats) {
 				if(getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.GUNBOATS)) {
-					flyingSpeed = 0.06F;
+					getAttributeInstance(AirStrafingAttribute.AIR_STRAFING_SPEED).addTemporaryModifier(AttributeModifiers.GUNBOATS);
 					fallDistance = 0F;
 				}
-				else
-					flyingSpeed = 0.02F;
 			}
 		}
 	}
