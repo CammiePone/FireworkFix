@@ -2,7 +2,7 @@ package dev.cammiescorner.fireworkfrenzy.registry;
 
 import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
 import dev.cammiescorner.fireworkfrenzy.items.GunboatsItem;
-import dev.cammiescorner.fireworkfrenzy.items.MemeSpoonItem;
+import dev.cammiescorner.fireworkfrenzy.items.MarketGardenerItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
@@ -16,13 +16,13 @@ import net.minecraft.util.registry.Registry;
 
 public class ModItems {
 	//-----Items-----//
-	public static final Item MEME_SPOON = new MemeSpoonItem();
+	public static final Item MARKET_GARDENER = new MarketGardenerItem();
 	public static final Item GUNBOATS = new GunboatsItem(new GunboatsArmourMaterial(), EquipmentSlot.FEET, new FabricItemSettings().group(ItemGroup.COMBAT));
 
 	//-----Registry-----//
 	public static void register() {
 		if(FireworkFrenzy.config.enableMemeSpoon)
-			Registry.register(Registry.ITEM, new Identifier(FireworkFrenzy.MOD_ID, "meme_spoon"), MEME_SPOON);
+			Registry.register(Registry.ITEM, new Identifier(FireworkFrenzy.MOD_ID, "market_gardener"), MARKET_GARDENER);
 		if(FireworkFrenzy.config.enableGunboats)
 			Registry.register(Registry.ITEM, new Identifier(FireworkFrenzy.MOD_ID, "gunboats"), GUNBOATS);
 	}

@@ -1,5 +1,7 @@
 {
 	"item.minecraft.firework_rocket.damage": "Damage:",
+	"item.fireworkfrenzy.market_gardener": "Market Gardener",
+	"item.fireworkfrenzy.gunboats": "Gunboats",
 
 	"text.autoconfig.fireworkfrenzy.title": "Firework Frenzy",
 	"text.autoconfig.fireworkfrenzy.option.selfDamageInvincibilityTicks": "Self-Damage Invincibility Ticks",

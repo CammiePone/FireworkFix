@@ -29,7 +29,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 	@Inject(method = "tick", at = @At("TAIL"))
 	public void tick(CallbackInfo info) {
 		if(isBlastJumping()) {
-			if(isOnGround() || (isTouchingWater() && age % 60 == 0) || (FireworkFrenzy.config.elytrasCancelRocketJumping && isFallFlying()))
+			if(isOnGround() || hasVehicle() || (isTouchingWater() && age % 60 == 0) || (FireworkFrenzy.config.elytrasCancelRocketJumping && isFallFlying()))
 				setBlastJumping(false);
 
 			if(FireworkFrenzy.config.enableGunboats) {
@@ -55,7 +55,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 
 		boolean isCrit = getAttackCooldownProgress(0.5F) > 0.9F && this.fallDistance > 0.0F && !this.onGround && !this.isClimbing() && !this.isTouchingWater() && !this.hasStatusEffect(StatusEffects.BLINDNESS) && !this.hasVehicle() && target instanceof LivingEntity && !this.isSprinting();
 
-		return isBlastJumping() && getMainHandStack().isOf(ModItems.MEME_SPOON) ? damage * (isCrit ? 2 : 3) : damage;
+		return isBlastJumping() && getMainHandStack().isOf(ModItems.MARKET_GARDENER) ? damage * (isCrit ? 2 : 3) : damage;
 	}
 
 	@Override
