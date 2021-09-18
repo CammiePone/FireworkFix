@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/handheld",
 	"textures": {
-		"layer0": "minecraft:item/golden_shovel"
+		"layer0": "fireworkfrenzy:item/market_gardener"
 	}
 }
