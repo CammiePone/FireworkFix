@@ -30,7 +30,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 
 	@Inject(method = "tick", at = @At("TAIL"))
 	public void tick(CallbackInfo info) {
-		getAttributeInstance(AirStrafingAttribute.AIR_STRAFING_SPEED).removeModifier(AttributeModifiers.GUNBOATS);
+		getAttributeInstance(AirStrafingAttribute.getAirStrafingAttribute()).removeModifier(AttributeModifiers.GUNBOATS);
 
 		if(isBlastJumping()) {
 			if(isOnGround() || hasVehicle() || (isTouchingWater() && age % 60 == 0) || (FireworkFrenzy.config.elytrasCancelRocketJumping && isFallFlying()))
@@ -38,7 +38,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 
 			if(FireworkFrenzy.config.enableGunboats) {
 				if(getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.GUNBOATS)) {
-					getAttributeInstance(AirStrafingAttribute.AIR_STRAFING_SPEED).addTemporaryModifier(AttributeModifiers.GUNBOATS);
+					getAttributeInstance(AirStrafingAttribute.getAirStrafingAttribute()).addTemporaryModifier(AttributeModifiers.GUNBOATS);
 					fallDistance = 0F;
 				}
 			}
