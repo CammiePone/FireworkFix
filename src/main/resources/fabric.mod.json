@@ -6,7 +6,7 @@
 	"description": "An overhaul to Firework Rockets and how the Crossbow makes use of them.",
 	"authors": ["Cammie"],
 	"contact": {},
-	"license": "MIT",
+	"license": "Custom License",
 	"icon": "assets/fireworkfrenzy/icon.png",
 	"environment": "*",
 	"entrypoints": {
