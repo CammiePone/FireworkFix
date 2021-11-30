@@ -22,9 +22,9 @@
 	],
 	"accessWidener": "META-INF/fireworkfrenzy.accesswidener",
 	"depends": {
-		"fabricloader": ">=0.11.6",
+		"fabricloader": ">=0.12.0",
 		"fabric": "*",
-		"minecraft": "1.17.x",
-		"cloth-config2": ">=5.0.38"
+		"minecraft": "1.18.x",
+		"cloth-config2": ">=6.0.42"
 	}
 }

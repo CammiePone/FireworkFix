@@ -33,7 +33,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 
 			if(FireworkFrenzy.config.enableGunboats) {
 				if(getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.GUNBOATS)) {
-					flyingSpeed *= 2F;
+					airStrafingSpeed *= 2F;
 					fallDistance = 0F;
 				}
 			}

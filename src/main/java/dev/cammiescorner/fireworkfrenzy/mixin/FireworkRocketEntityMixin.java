@@ -12,6 +12,8 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -38,8 +40,8 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 
 	public FireworkRocketEntityMixin(EntityType<? extends ProjectileEntity> type, World world) { super(type, world); }
 
-	@Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 1), cancellable = true, locals = LocalCapture.CAPTURE_FAILSOFT)
-	public void explodePreDamage(CallbackInfo info, float damage, double d, Vec3d pos, List list, Iterator iterator, LivingEntity entity) {
+	@Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 1),  locals = LocalCapture.CAPTURE_FAILSOFT)
+	public void explodePreDamage(CallbackInfo info, float damage, ItemStack stack, NbtCompound tag, NbtList nbtList, double d, Vec3d vec, List<LivingEntity> list, Iterator<LivingEntity> iterator, LivingEntity entity) {
 		target = entity;
 
 		if(entity == getOwner())
@@ -47,7 +49,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 	}
 
 	@Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 1), locals = LocalCapture.CAPTURE_FAILSOFT)
-	public void explodePostDamage(CallbackInfo info, float damage, double d, Vec3d pos, List<LivingEntity> list, Iterator<LivingEntity> iterator, LivingEntity entity) {
+	public void explodePostDamage(CallbackInfo info, float damage, ItemStack stack, NbtCompound tag, NbtList nbtList, double d, Vec3d vec, List<LivingEntity> list, Iterator<LivingEntity> iterator, LivingEntity entity) {
 		if(FireworkFrenzy.config.allowRocketJumping && hasExplosionEffects()) {
 			Box box = new Box(getX() - 5.25, getY() - 5.25, getZ() - 5.25, getX() + 5.25, getY() + 5.25, getZ() + 5.25);
 			float radius = (float) (box.getXLength() / 2);
