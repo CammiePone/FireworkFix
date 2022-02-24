@@ -22,7 +22,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 	public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) { super(world, profile); }
 
 	@Inject(method = "onTrackedDataSet", at = @At("HEAD"))
-	public void onTrackedDataSet(TrackedData<?> data, CallbackInfo info) {
+	public void fireworkfrenzy$onTrackedDataSet(TrackedData<?> data, CallbackInfo info) {
 		if(isBlastJumping())
 			this.client.getSoundManager().play(new BlastJumpingSoundInstance((ClientPlayerEntity) (Object) this));
 	}

@@ -29,13 +29,13 @@ public abstract class FireworkRocketItemMixin extends Item {
 	public FireworkRocketItemMixin(Settings settings) { super(settings); }
 
 	@Inject(method = "use", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"))
-	public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> info) {
+	public void fireworkfrenzy$use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> info) {
 		if(user instanceof BlastJumper jumper && jumper.isBlastJumping() && FireworkFrenzy.config.boostsCancelRocketJumping)
 			jumper.setBlastJumping(false);
 	}
 
-	@Inject(method = "appendTooltip", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/nbt/NbtCompound;getList(Ljava/lang/String;I)Lnet/minecraft/nbt/NbtList;"), locals = LocalCapture.CAPTURE_FAILSOFT)
-	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo info, NbtCompound nbtCompound, NbtList nbtList) {
+	@Inject(method = "appendTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/NbtList;isEmpty()Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
+	public void fireworkfrenzy$appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo info, NbtCompound nbtCompound, NbtList nbtList) {
 		if(FireworkFrenzy.config.showTooltip && nbtList.size() > 0)
 			tooltip.add(new TranslatableText(getTranslationKey() + ".damage").append(" ")
 					.append(String.valueOf(FireworkFrenzy.config.baseDamage * nbtList.size()))

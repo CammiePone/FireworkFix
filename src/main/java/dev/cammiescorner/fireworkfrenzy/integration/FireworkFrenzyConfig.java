@@ -7,18 +7,17 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 @Config(name = FireworkFrenzy.MOD_ID)
 public class FireworkFrenzyConfig implements ConfigData {
-	@Comment("Number of Invincibility Ticks when a player hits themselves" +
-			"\n    with a Firework Rocket? (Vanilla: 10)")
-	public int selfDamageInvincibilityTicks = 0;
-
-	@Comment("Base damage of Firework Rockets.")
+	@Comment("Base damage of Firework Rockets")
 	public float baseDamage = 3F;
 
-	@Comment("Multiplier for Rocket Jump Velocity.")
+	@Comment("Multiplier for Rocket Jump Velocity")
 	public double rocketJumpMultiplier = 1D;
 
 	@Comment("Multiplier for other entity's Firework Rocket Knockback")
 	public double otherEntityKnockback = 0.5D;
+
+	@Comment("Multiplier for air strafing while Rocket Jumping")
+	public double airStrafingMultiplier = 3D;
 
 	@Comment("Should item display damage of Firework Rockets?")
 	public boolean showTooltip = true;
@@ -28,14 +27,6 @@ public class FireworkFrenzyConfig implements ConfigData {
 
 	@Comment("Should players be able to Rocket Jump?")
 	public boolean allowRocketJumping = true;
-
-	@Comment("Should the <insert shovel name> be added to the game?" +
-			"\n    (Restart Required)")
-	public boolean enableMemeSpoon = true;
-
-	@Comment("Should the <insert boots name> be added to the game?" +
-			"\n    (Restart Required)")
-	public boolean enableGunboats = true;
 
 	@Comment("Should players be able to use Firework Rockets from their" +
 			"\n    inventory, and not just their offhand?")
