@@ -2,20 +2,22 @@ package dev.cammiescorner.fireworkfrenzy.mixin;
 
 import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
 import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.FlyingItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -48,26 +50,23 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 		if(FireworkFrenzy.config.allowRocketJumping && hasExplosionEffects() && subNbt != null) {
 			Box box = getBoundingBox().expand(d);
 			float radius = (float) (box.getXLength() / 2);
-			double multiplier = (subNbt.getList("Explosions", NbtElement.COMPOUND_TYPE).size() / 4.5D) * FireworkFrenzy.config.rocketJumpMultiplier;
+			double multiplier = (subNbt.getList("Explosions", NbtElement.COMPOUND_TYPE).size() * 0.4	) * FireworkFrenzy.config.rocketJumpMultiplier;
 			DamageSource source = DamageSource.firework((FireworkRocketEntity) (Object) this, getOwner());
 
 			if(!target.blockedByShield(source)) {
-				EntityHitResult hitResult = ProjectileUtil.raycast(this, getPos(), target.getPos().add(0, target.getHeight() * 0.5, 0), box, hit -> !hit.isSpectator(), 20);
-
-				if(hitResult != null) {
-					Vec3d direction = hitResult.getPos().subtract(getPos());
-					float damageMultiplier = (float) Math.max(0, 1 - (direction.length() / radius));
-					float fireworkDamage = FireworkFrenzy.config.baseDamage * subNbt.getList("Explosions", NbtElement.COMPOUND_TYPE).size();
-
-					if(target == directTarget)
-						target.damage(source, fireworkDamage);
-					else
-						target.damage(source, fireworkDamage * damageMultiplier);
-				}
-
-				Vec3d targetPos = target.getPos().add(0, target.getHeight() * 0.5, 0);
+				Vec3d targetPos = target.getPos().add(0, MathHelper.clamp(getY() - target.getY(), 0, target.getHeight()), 0);
 				Vec3d direction = targetPos.subtract(getPos());
-				double inverseDistance = Math.max(0, 1 - (direction.length() / radius));
+				double distance = direction.length() - getWidth() - target.getWidth();
+				double inverseDistance = MathHelper.clamp(1 - (distance / radius), 0, 1);
+				float fireworkDamage = FireworkFrenzy.config.baseDamage * subNbt.getList("Explosions", NbtElement.COMPOUND_TYPE).size();
+
+				if(target == getOwner() && EnchantmentHelper.getLevel(FireworkFrenzy.JUMPER_SPECIALIST, target.getEquippedStack(EquipmentSlot.FEET)) > 0)
+					fireworkDamage = 0;
+
+				if(target == directTarget)
+					target.damage(source, fireworkDamage);
+				else
+					target.damage(source, (float) (fireworkDamage * inverseDistance));
 
 				target.knockbackVelocity = 0F;
 				target.setVelocity(target.getVelocity().getX(), Math.min(1D, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());

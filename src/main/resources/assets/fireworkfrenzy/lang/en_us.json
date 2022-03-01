@@ -1,6 +1,8 @@
 {
 	"item.minecraft.firework_rocket.damage": "Damage:",
 
+	"enchantment.fireworkfrenzy.jumper_specialist": "Jumper Specialist",
+
 	"text.autoconfig.fireworkfrenzy.title": "Firework Frenzy",
 	"text.autoconfig.fireworkfrenzy.option.baseDamage": "Base Firework Rocket Damage",
 	"text.autoconfig.fireworkfrenzy.option.rocketJumpMultiplier": "Rocket Jump Multiplier",
