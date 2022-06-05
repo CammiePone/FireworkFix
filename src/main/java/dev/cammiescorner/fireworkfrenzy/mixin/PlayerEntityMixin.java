@@ -29,7 +29,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 			if(!world.isClient() && (isOnGround() || isSubmergedInWater()))
 				setTimeOnGround(getTimeOnGround() + 1);
 
-			if(getTimeOnGround() > 2 || hasVehicle() || (FireworkFrenzy.config.elytrasCancelRocketJumping && isFallFlying()))
+			if(getTimeOnGround() > 2 || hasVehicle() || (FireworkFrenzy.config.elytrasCancelRocketJumping && isFallFlying()) || !isAlive())
 				setBlastJumping(false);
 		}
 	}
