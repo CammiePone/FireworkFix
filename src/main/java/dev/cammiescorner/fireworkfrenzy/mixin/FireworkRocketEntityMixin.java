@@ -56,7 +56,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 			if(!target.blockedByShield(source)) {
 				Vec3d targetPos = target.getPos().add(0, MathHelper.clamp(getY() - target.getY(), 0, target.getHeight()), 0);
 				Vec3d direction = targetPos.subtract(getPos());
-				double distance = direction.length() - getWidth() - target.getWidth();
+				double distance = direction.length() - (getWidth() * 0.5) - (target.getWidth() * 0.5);
 				double inverseDistance = MathHelper.clamp(1 - (distance / radius), 0, 1);
 				float fireworkDamage = FireworkFrenzy.config.baseDamage * subNbt.getList("Explosions", NbtElement.COMPOUND_TYPE).size();
 

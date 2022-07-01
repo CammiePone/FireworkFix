@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -37,7 +36,7 @@ public abstract class FireworkRocketItemMixin extends Item {
 	@Inject(method = "appendTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/NbtList;isEmpty()Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
 	public void fireworkfrenzy$appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo info, NbtCompound nbtCompound, NbtList nbtList) {
 		if(FireworkFrenzy.config.showTooltip && nbtList.size() > 0)
-			tooltip.add(new TranslatableText(getTranslationKey() + ".damage").append(" ")
+			tooltip.add(Text.translatable(getTranslationKey() + ".damage").append(" ")
 					.append(String.valueOf(FireworkFrenzy.config.baseDamage * nbtList.size()))
 					.formatted(Formatting.GRAY));
 	}

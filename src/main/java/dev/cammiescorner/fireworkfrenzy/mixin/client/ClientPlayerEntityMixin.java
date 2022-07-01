@@ -8,6 +8,8 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.data.TrackedData;
+import net.minecraft.network.encryption.PlayerPublicKey;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,11 +21,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity implements BlastJumper {
 	@Shadow @Final protected MinecraftClient client;
 
-	public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) { super(world, profile); }
+	public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile, @Nullable PlayerPublicKey publicKey) { super(world, profile, publicKey); }
 
 	@Inject(method = "onTrackedDataSet", at = @At("HEAD"))
 	public void fireworkfrenzy$onTrackedDataSet(TrackedData<?> data, CallbackInfo info) {
-		if(isBlastJumping())
-			this.client.getSoundManager().play(new BlastJumpingSoundInstance((ClientPlayerEntity) (Object) this));
+		BlastJumpingSoundInstance soundInstance = new BlastJumpingSoundInstance((ClientPlayerEntity) (Object) this);
+
+		if(isBlastJumping() && !client.getSoundManager().isPlaying(soundInstance))
+			client.getSoundManager().play(soundInstance);
 	}
 }

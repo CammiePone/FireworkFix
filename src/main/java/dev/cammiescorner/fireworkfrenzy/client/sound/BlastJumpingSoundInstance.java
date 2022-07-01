@@ -5,13 +5,14 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.sound.MovingSoundInstance;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.random.Random;
 
 public class BlastJumpingSoundInstance extends MovingSoundInstance {
 	private final ClientPlayerEntity player;
 	private int tickCount;
 
 	public BlastJumpingSoundInstance(ClientPlayerEntity player) {
-		super(SoundEvents.ITEM_ELYTRA_FLYING, SoundCategory.PLAYERS);
+		super(SoundEvents.ITEM_ELYTRA_FLYING, SoundCategory.PLAYERS, Random.create());
 		this.player = player;
 		this.repeat = true;
 		this.repeatDelay = 0;
