@@ -1,0 +1,19 @@
+{
+	"item.minecraft.firework_rocket.damage": "Урон:",
+
+	"enchantment.fireworkfrenzy.jumper_specialist": "Профессиональный прыгун",
+
+	"text.autoconfig.fireworkfrenzy.title": "Firework Frenzy",
+	"text.autoconfig.fireworkfrenzy.option.baseDamage": "Базовый урон фейерверков",
+	"text.autoconfig.fireworkfrenzy.option.rocketJumpMultiplier": "Множитель ракетного прыжка",
+	"text.autoconfig.fireworkfrenzy.option.otherEntityKnockback": "Множитель отталкивания других сущностей",
+	"text.autoconfig.fireworkfrenzy.option.airStrafingMultiplier": "Множитель воздушного стрейфа от ракетного прыжка",
+	"text.autoconfig.fireworkfrenzy.option.showTooltip": "Показывать урон в описании фейерверка",
+	"text.autoconfig.fireworkfrenzy.option.onlyAffectCrossbows": "Влияет ли множитель лишь на арбалеты",
+	"text.autoconfig.fireworkfrenzy.option.allowRocketJumping": "Разрешить ракетные прыжки",
+	"text.autoconfig.fireworkfrenzy.option.useRocketsFromInv": "Использовать фейерверки со всего инвентаря",
+	"text.autoconfig.fireworkfrenzy.option.elytrasCancelRocketJumping": "Элитры отменяют ракетный прыжок",
+	"text.autoconfig.fireworkfrenzy.option.boostsCancelRocketJumping": "Буст отменяет ракетный прыжок",
+	"text.autoconfig.fireworkfrenzy.option.crossbowsGetInfinity": "Бесконечность на арбалетах",
+	"text.autoconfig.fireworkfrenzy.option.infinityAffectsRockets": "Бесконечность работает с фейерверками"
+}
