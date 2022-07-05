@@ -15,5 +15,6 @@
 	"text.autoconfig.fireworkfrenzy.option.elytrasCancelRocketJumping": "Елітри відміняють ракетний стрибок",
 	"text.autoconfig.fireworkfrenzy.option.boostsCancelRocketJumping": "Буст відміняє ракетний стрибок",
 	"text.autoconfig.fireworkfrenzy.option.crossbowsGetInfinity": "Дозволити арбалетам мати нескінченність",
-	"text.autoconfig.fireworkfrenzy.option.infinityAffectsRockets": "Нескінченність працює для феєрверків"
+	"text.autoconfig.fireworkfrenzy.option.infinityAffectsRockets": "Нескінченність працює для феєрверків",
+	"text.autoconfig.fireworkfrenzy.option.disableFireworkRandomness" : "Відключити випадковість феєрверків"
 }
