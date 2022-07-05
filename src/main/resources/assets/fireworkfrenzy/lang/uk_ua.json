@@ -1,0 +1,19 @@
+{
+	"item.minecraft.firework_rocket.damage": "Ушкодження:",
+
+	"enchantment.fireworkfrenzy.jumper_specialist": "Професійний стрибун",
+
+	"text.autoconfig.fireworkfrenzy.title": "Firework Frenzy",
+	"text.autoconfig.fireworkfrenzy.option.baseDamage": "Базове ушкодження від феєрверку",
+	"text.autoconfig.fireworkfrenzy.option.rocketJumpMultiplier": "Множник ракетного стрибку",
+	"text.autoconfig.fireworkfrenzy.option.otherEntityKnockback": "Множник відштовхування інших ентіті",
+	"text.autoconfig.fireworkfrenzy.option.airStrafingMultiplier": "Множник стрейфу від ракетного стрибку в повітрі",
+	"text.autoconfig.fireworkfrenzy.option.showTooltip": "Показувати ушкодження в описі предмету",
+	"text.autoconfig.fireworkfrenzy.option.onlyAffectCrossbows": "Чи впливає множник ушкодження лише на арбалети",
+	"text.autoconfig.fireworkfrenzy.option.allowRocketJumping": "Дозволити ракетні стрибки",
+	"text.autoconfig.fireworkfrenzy.option.useRocketsFromInv": "Використовувати феєрверки з інвентарю",
+	"text.autoconfig.fireworkfrenzy.option.elytrasCancelRocketJumping": "Елітри відміняють ракетний стрибок",
+	"text.autoconfig.fireworkfrenzy.option.boostsCancelRocketJumping": "Буст відміняє ракетний стрибок",
+	"text.autoconfig.fireworkfrenzy.option.crossbowsGetInfinity": "Дозволити арбалетам мати нескінченність",
+	"text.autoconfig.fireworkfrenzy.option.infinityAffectsRockets": "Нескінченність працює для феєрверків"
+}
