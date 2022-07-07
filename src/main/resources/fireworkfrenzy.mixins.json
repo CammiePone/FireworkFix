@@ -1,19 +1,20 @@
 {
-	"required": true,
-	"minVersion": "0.8",
-	"package": "dev.cammiescorner.fireworkfrenzy.mixin",
-	"compatibilityLevel": "JAVA_17",
-	"mixins": [
-		"CrossbowItemMixin",
-		"FireworkRocketEntityMixin",
-		"FireworkRocketItemMixin",
-		"InfinityEnchantmentMixin",
-		"PlayerEntityMixin"
-	],
-	"client": [
-		"client.ClientPlayerEntityMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.cammiescorner.fireworkfrenzy.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "CrossbowItemMixin",
+    "FireworkRocketEntityMixin",
+    "FireworkRocketEntityNoRandomMixin",
+    "FireworkRocketItemMixin",
+    "InfinityEnchantmentMixin",
+    "PlayerEntityMixin"
+  ],
+  "client": [
+    "client.ClientPlayerEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }
