@@ -1,6 +1,6 @@
 package dev.cammiescorner.fireworkfrenzy.mixin;
 
-import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
+import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
 import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,15 +29,15 @@ public abstract class FireworkRocketItemMixin extends Item {
 
 	@Inject(method = "use", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"))
 	public void fireworkfrenzy$use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> info) {
-		if(user instanceof BlastJumper jumper && jumper.isBlastJumping() && FireworkFrenzy.config.boostsCancelRocketJumping)
+		if(user instanceof BlastJumper jumper && jumper.isBlastJumping() && FireworkFrenzyConfig.boostsCancelRocketJumping)
 			jumper.setBlastJumping(false);
 	}
 
 	@Inject(method = "appendTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/NbtList;isEmpty()Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
 	public void fireworkfrenzy$appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo info, NbtCompound nbtCompound, NbtList nbtList) {
-		if(FireworkFrenzy.config.showTooltip && nbtList.size() > 0)
+		if(FireworkFrenzyConfig.showTooltip && nbtList.size() > 0)
 			tooltip.add(Text.translatable(getTranslationKey() + ".damage").append(" ")
-					.append(String.valueOf(FireworkFrenzy.config.baseDamage * nbtList.size()))
+					.append(String.valueOf(FireworkFrenzyConfig.baseDamage * nbtList.size()))
 					.formatted(Formatting.GRAY));
 	}
 }

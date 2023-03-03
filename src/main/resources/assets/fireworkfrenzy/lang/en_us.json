@@ -2,18 +2,20 @@
 	"item.minecraft.firework_rocket.damage": "Damage:",
 
 	"enchantment.fireworkfrenzy.jumper_specialist": "Jumper Specialist",
+	"enchantment.fireworkfrenzy.air_strike": "Air Strike",
 
-	"text.autoconfig.fireworkfrenzy.title": "Firework Frenzy",
-	"text.autoconfig.fireworkfrenzy.option.baseDamage": "Base Firework Rocket Damage",
-	"text.autoconfig.fireworkfrenzy.option.rocketJumpMultiplier": "Rocket Jump Multiplier",
-	"text.autoconfig.fireworkfrenzy.option.otherEntityKnockback": "Other Entity Knockback Multiplier",
-	"text.autoconfig.fireworkfrenzy.option.airStrafingMultiplier": "Rocket Jumping Air Strafing Multiplier",
-	"text.autoconfig.fireworkfrenzy.option.showTooltip": "Show Damage Tooltip",
-	"text.autoconfig.fireworkfrenzy.option.onlyAffectCrossbows": "Only Affect Crossbows",
-	"text.autoconfig.fireworkfrenzy.option.allowRocketJumping": "Allow Rocket Jumping",
-	"text.autoconfig.fireworkfrenzy.option.useRocketsFromInv": "Use Firework Rockets From Inventory",
-	"text.autoconfig.fireworkfrenzy.option.elytrasCancelRocketJumping": "Elytras Cancel Rocket Jumping",
-	"text.autoconfig.fireworkfrenzy.option.boostsCancelRocketJumping": "Rocket Boosts Cancel Rocket Jumping",
-	"text.autoconfig.fireworkfrenzy.option.crossbowsGetInfinity": "Crossbows Can Have Infinity",
-	"text.autoconfig.fireworkfrenzy.option.infinityAffectsRockets": "Infinity Works on Firework Rockets"
+	"fireworkfrenzy.midnightconfig.title": "Firework Frenzy",
+	"fireworkfrenzy.midnightconfig.airStrikeJumpingChargeTime": "Air Strike Charge Time While Rocket Jumping",
+	"fireworkfrenzy.midnightconfig.airStrikeGroundedChargeTime": "Air Strike Charge Time While Grounded",
+	"fireworkfrenzy.midnightconfig.baseDamage": "Base Firework Rocket Damage",
+	"fireworkfrenzy.midnightconfig.rocketJumpMultiplier": "Rocket Jump Multiplier",
+	"fireworkfrenzy.midnightconfig.otherEntityKnockBack": "Other Entity Knockback Multiplier",
+	"fireworkfrenzy.midnightconfig.airStrafingMultiplier": "Rocket Jumping Air Strafing Multiplier",
+	"fireworkfrenzy.midnightconfig.showTooltip": "Show Damage Tooltip",
+	"fireworkfrenzy.midnightconfig.allowRocketJumping": "Allow Rocket Jumping",
+	"fireworkfrenzy.midnightconfig.useRocketsFromInv": "Use Firework Rockets From Inventory",
+	"fireworkfrenzy.midnightconfig.elytraCancelsRocketJumping": "Elytras Cancel Rocket Jumping",
+	"fireworkfrenzy.midnightconfig.boostsCancelRocketJumping": "Rocket Boosts Cancel Rocket Jumping",
+	"fireworkfrenzy.midnightconfig.crossbowsGetInfinity": "Crossbows Can Have Infinity",
+	"fireworkfrenzy.midnightconfig.infinityAffectsRockets": "Infinity Works on Firework Rockets"
 }

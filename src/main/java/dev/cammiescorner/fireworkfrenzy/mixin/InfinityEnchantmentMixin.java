@@ -1,6 +1,6 @@
 package dev.cammiescorner.fireworkfrenzy.mixin;
 
-import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
+import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.InfinityEnchantment;
@@ -14,6 +14,6 @@ public abstract class InfinityEnchantmentMixin extends Enchantment {
 
 	@Override
 	public boolean isAcceptableItem(ItemStack stack) {
-		return super.isAcceptableItem(stack) || (EnchantmentTarget.CROSSBOW.isAcceptableItem(stack.getItem()) && FireworkFrenzy.config.crossbowsGetInfinity);
+		return super.isAcceptableItem(stack) || (EnchantmentTarget.CROSSBOW.isAcceptableItem(stack.getItem()) && FireworkFrenzyConfig.crossbowsGetInfinity);
 	}
 }
