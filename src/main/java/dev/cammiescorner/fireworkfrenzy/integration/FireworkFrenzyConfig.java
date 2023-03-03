@@ -9,6 +9,7 @@ public class FireworkFrenzyConfig extends MidnightConfig {
 	@Entry public static double rocketJumpMultiplier = 1D;
 	@Entry public static double otherEntityKnockBack = 0.5D;
 	@Entry public static double airStrafingMultiplier = 3D;
+	@Entry public static double airStrikeDamageMultiplier = 0.5;
 	@Entry public static boolean showTooltip = true;
 	@Entry public static boolean allowRocketJumping = true;
 	@Entry public static boolean useRocketsFromInv = true;

@@ -64,7 +64,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				if(target == getOwner() && EnchantmentHelper.getLevel(FireworkFrenzy.JUMPER_SPECIALIST, target.getEquippedStack(EquipmentSlot.FEET)) > 0)
 					fireworkDamage = 0;
 				if(EnchantmentHelper.getLevel(FireworkFrenzy.AIR_STRIKE, stack) > 0 && getOwner() instanceof BlastJumper jumper && jumper.isBlastJumping())
-					fireworkDamage *= 0.5;
+					fireworkDamage *= FireworkFrenzyConfig.airStrikeDamageMultiplier;
 
 				if(target == directTarget)
 					target.damage(source, fireworkDamage);

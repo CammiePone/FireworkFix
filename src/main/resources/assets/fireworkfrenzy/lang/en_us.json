@@ -11,6 +11,7 @@
 	"fireworkfrenzy.midnightconfig.rocketJumpMultiplier": "Rocket Jump Multiplier",
 	"fireworkfrenzy.midnightconfig.otherEntityKnockBack": "Other Entity Knockback Multiplier",
 	"fireworkfrenzy.midnightconfig.airStrafingMultiplier": "Rocket Jumping Air Strafing Multiplier",
+	"fireworkfrenzy.midnightconfig.airStrikeDamageMultiplier": "Air Strike Damage Multiplier While Rocket Jumping",
 	"fireworkfrenzy.midnightconfig.showTooltip": "Show Damage Tooltip",
 	"fireworkfrenzy.midnightconfig.allowRocketJumping": "Allow Rocket Jumping",
 	"fireworkfrenzy.midnightconfig.useRocketsFromInv": "Use Firework Rockets From Inventory",
