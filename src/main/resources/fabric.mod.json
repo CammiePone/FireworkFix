@@ -13,6 +13,9 @@
 		"main": [
 			"dev.cammiescorner.fireworkfrenzy.FireworkFrenzy"
 		],
+		"client": [
+			"dev.cammiescorner.fireworkfrenzy.client.FireworkFrenzyClient"
+		],
 		"modmenu": [
 			"dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyModMenu"
 		]

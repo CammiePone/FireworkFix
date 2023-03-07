@@ -4,9 +4,12 @@
 	"package": "dev.cammiescorner.fireworkfrenzy.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
+		"AreaEffectCloudEntityMixin",
+		"CloudRadiusAccessor",
 		"CrossbowItemMixin",
 		"FireworkRocketEntityMixin",
 		"FireworkRocketItemMixin",
+		"FireworkStarRecipeMixin",
 		"InfinityEnchantmentMixin",
 		"PlayerEntityMixin"
 	],

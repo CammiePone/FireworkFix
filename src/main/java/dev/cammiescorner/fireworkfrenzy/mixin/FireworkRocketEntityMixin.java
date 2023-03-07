@@ -1,13 +1,11 @@
 package dev.cammiescorner.fireworkfrenzy.mixin;
 
 import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
+import dev.cammiescorner.fireworkfrenzy.entities.PotionCloudEntity;
 import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
 import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.FlyingItemEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,11 +15,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.potion.Potion;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,11 +43,15 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 	@Shadow protected abstract boolean hasExplosionEffects();
 	@Shadow public abstract ItemStack getStack();
 
+	@Shadow private @Nullable LivingEntity shooter;
 	@Unique public LivingEntity directTarget;
 
 	public FireworkRocketEntityMixin(EntityType<? extends ProjectileEntity> type, World world) { super(type, world); }
 
-	@Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 1), locals = LocalCapture.CAPTURE_FAILSOFT)
+	@Inject(method = "explode", at = @At(value = "INVOKE",
+			target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z",
+			ordinal = 1
+	), locals = LocalCapture.CAPTURE_FAILSOFT)
 	public void fireworkfrenzy$explodePostDamage(CallbackInfo info, float damage, ItemStack stack, NbtCompound tag, NbtList nbtList, double d, Vec3d vec, List<LivingEntity> list, Iterator<LivingEntity> iterator, LivingEntity target) {
 		NbtCompound subNbt = dataTracker.get(ITEM).getSubNbt("Fireworks");
 
@@ -82,6 +88,35 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 		if(target instanceof BlastJumper jumper) {
 			jumper.setTimeOnGround(0);
 			jumper.setBlastJumping(true);
+		}
+	}
+
+	@Inject(method = "explode", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
+	private void fireworkfrenzy$spawnPotionCloud(CallbackInfo info) {
+		ItemStack stack = dataTracker.get(ITEM);
+		NbtCompound tag = stack.isEmpty() ? null : stack.getSubNbt("Fireworks");
+
+		if(tag != null) {
+			NbtList nbtList = tag.getList("Explosions", NbtElement.COMPOUND_TYPE);
+
+			for(int i = 0; i < nbtList.size(); i++) {
+				NbtCompound nbt = nbtList.getCompound(i);
+
+				if(nbt.contains("Potion")) {
+					Potion potion = Registries.POTION.get(new Identifier(nbt.getString("Potion")));
+					PotionCloudEntity cloud = FireworkFrenzy.POTION_CLOUD.create(world);
+
+					if(cloud != null) {
+						cloud.setPotion(potion);
+						cloud.setRadius(2.5F);
+						cloud.setOwner(shooter);
+						cloud.setDuration(200);
+						cloud.setWaitTime(0);
+						cloud.setPosition(getPos().add(0, -cloud.getRadius(), 0));
+						world.spawnEntity(cloud);
+					}
+				}
+			}
 		}
 	}
 
