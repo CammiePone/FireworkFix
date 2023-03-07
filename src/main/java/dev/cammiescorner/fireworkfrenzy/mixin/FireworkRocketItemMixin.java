@@ -37,7 +37,7 @@ public abstract class FireworkRocketItemMixin extends Item {
 	public void fireworkfrenzy$appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo info, NbtCompound nbtCompound, NbtList nbtList) {
 		if(FireworkFrenzyConfig.showTooltip && nbtList.size() > 0)
 			tooltip.add(Text.translatable(getTranslationKey() + ".damage").append(" ")
-					.append(String.valueOf(FireworkFrenzyConfig.baseDamage * nbtList.size()))
+					.append(String.valueOf(FireworkFrenzyConfig.mobDamage * nbtList.size()))
 					.formatted(Formatting.GRAY));
 	}
 }

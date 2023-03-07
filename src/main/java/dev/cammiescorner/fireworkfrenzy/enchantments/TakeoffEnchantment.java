@@ -5,8 +5,8 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 
-public class JumperSpecialistEnchantment extends Enchantment {
-	public JumperSpecialistEnchantment() {
+public class TakeoffEnchantment extends Enchantment {
+	public TakeoffEnchantment() {
 		super(Rarity.UNCOMMON, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[] {EquipmentSlot.FEET});
 	}
 

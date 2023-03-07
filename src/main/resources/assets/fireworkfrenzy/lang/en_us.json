@@ -1,13 +1,14 @@
 {
 	"item.minecraft.firework_rocket.damage": "Damage:",
 
-	"enchantment.fireworkfrenzy.jumper_specialist": "Jumper Specialist",
+	"enchantment.fireworkfrenzy.takeoff": "Takeoff",
 	"enchantment.fireworkfrenzy.air_strike": "Air Strike",
 
 	"fireworkfrenzy.midnightconfig.title": "Firework Frenzy",
 	"fireworkfrenzy.midnightconfig.airStrikeJumpingChargeTime": "Air Strike Charge Time While Rocket Jumping",
 	"fireworkfrenzy.midnightconfig.airStrikeGroundedChargeTime": "Air Strike Charge Time While Grounded",
-	"fireworkfrenzy.midnightconfig.baseDamage": "Base Firework Rocket Damage",
+	"fireworkfrenzy.midnightconfig.mobDamage": "Base Firework Rocket Damage Against Mobs",
+	"fireworkfrenzy.midnightconfig.playerDamage": "Base Firework Rocket Damage Against Players",
 	"fireworkfrenzy.midnightconfig.rocketJumpMultiplier": "Rocket Jump Multiplier",
 	"fireworkfrenzy.midnightconfig.otherEntityKnockBack": "Other Entity Knockback Multiplier",
 	"fireworkfrenzy.midnightconfig.airStrafingMultiplier": "Rocket Jumping Air Strafing Multiplier",
