@@ -8,6 +8,6 @@ import net.minecraft.client.render.entity.EmptyEntityRenderer;
 public class FireworkFrenzyClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		EntityRendererRegistry.register(FireworkFrenzy.POTION_CLOUD, EmptyEntityRenderer::new);
+		EntityRendererRegistry.register(FireworkFrenzy.DAMAGE_CLOUD, EmptyEntityRenderer::new);
 	}
 }

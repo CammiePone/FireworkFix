@@ -1,25 +1,27 @@
 package dev.cammiescorner.fireworkfrenzy.mixin;
 
 import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
-import dev.cammiescorner.fireworkfrenzy.entities.PotionCloudEntity;
+import dev.cammiescorner.fireworkfrenzy.entities.DamageCloudEntity;
 import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
 import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.FlyingItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.FireworkRocketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.potion.Potion;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -44,34 +46,71 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 	@Shadow public abstract ItemStack getStack();
 
 	@Shadow private @Nullable LivingEntity shooter;
+
+	@Unique public FireworkRocketEntity self = (FireworkRocketEntity) (Object) this;
 	@Unique public LivingEntity directTarget;
+	@Unique public float blastSize = 2F;
+	@Unique public float knockbackAmount = 1F;
+	@Unique public int glowingAmount = 0;
 
 	public FireworkRocketEntityMixin(EntityType<? extends ProjectileEntity> type, World world) { super(type, world); }
+
+	@ModifyArg(method = "explode", at = @At(value = "INVOKE",
+			target = "Lnet/minecraft/util/math/Box;expand(D)Lnet/minecraft/util/math/Box;"
+	))
+	private double fireworkfrenzy$blastRadius(double value) {
+		NbtCompound tag = dataTracker.get(ITEM).getSubNbt("Fireworks");
+		FireworkRocketItem.Type type = FireworkRocketItem.Type.SMALL_BALL;
+
+		if(tag != null) {
+			NbtList nbtList = tag.getList("Explosions", NbtElement.COMPOUND_TYPE);
+
+			for(int i = 0; i < nbtList.size(); i++) {
+				NbtCompound nbt = nbtList.getCompound(i);
+
+				if(nbt.contains("Type"))
+					type = FireworkRocketItem.Type.values()[nbt.getByte("Type")];
+				if(nbt.getBoolean("Trail"))
+					knockbackAmount += 0.1F;
+				if(nbt.getBoolean("Flicker"))
+					glowingAmount += 20;
+			}
+		}
+
+		if(type == FireworkRocketItem.Type.LARGE_BALL)
+			blastSize = 5F;
+		else if(type == FireworkRocketItem.Type.STAR)
+			blastSize = 3F;
+		else
+			blastSize = 2F;
+
+		return blastSize;
+	}
 
 	@Inject(method = "explode", at = @At(value = "INVOKE",
 			target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z",
 			ordinal = 1
 	), locals = LocalCapture.CAPTURE_FAILSOFT)
 	public void fireworkfrenzy$explodePostDamage(CallbackInfo info, float damage, ItemStack stack, NbtCompound tag, NbtList nbtList, double d, Vec3d vec, List<LivingEntity> list, Iterator<LivingEntity> iterator, LivingEntity target) {
-		NbtCompound subNbt = dataTracker.get(ITEM).getSubNbt("Fireworks");
-
-		if(FireworkFrenzyConfig.allowRocketJumping && hasExplosionEffects() && subNbt != null) {
-			Box box = getBoundingBox().expand(d);
-			float radius = (float) (box.getXLength() / 2);
-			double multiplier = (subNbt.getList("Explosions", NbtElement.COMPOUND_TYPE).size() * 0.4	) * FireworkFrenzyConfig.rocketJumpMultiplier;
-			DamageSource source = DamageSource.firework((FireworkRocketEntity) (Object) this, getOwner());
+		if(FireworkFrenzyConfig.allowRocketJumping && hasExplosionEffects() && tag != null) {
+			float radius = blastSize / 2;
+			double multiplier = (nbtList.size() * 0.4) * FireworkFrenzyConfig.rocketJumpMultiplier * knockbackAmount;
+			DamageSource source = DamageSource.firework(self, getOwner());
 
 			if(!target.blockedByShield(source)) {
 				Vec3d targetPos = target.getPos().add(0, MathHelper.clamp(getY() - target.getY(), 0, target.getHeight()), 0);
 				Vec3d direction = targetPos.subtract(getPos());
 				double distance = direction.length() - (getWidth() * 0.5) - (target.getWidth() * 0.5);
 				double inverseDistance = MathHelper.clamp(1 - (distance / radius), 0, 1);
-				float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * subNbt.getList("Explosions", NbtElement.COMPOUND_TYPE).size();
+				float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * nbtList.size();
 
 				if(target == getOwner() && EnchantmentHelper.getLevel(FireworkFrenzy.TAKEOFF, target.getEquippedStack(EquipmentSlot.FEET)) > 0)
 					fireworkDamage = 0;
 				if(EnchantmentHelper.getLevel(FireworkFrenzy.AIR_STRIKE, stack) > 0 && getOwner() instanceof BlastJumper jumper && jumper.isBlastJumping())
 					fireworkDamage *= FireworkFrenzyConfig.airStrikeDamageMultiplier;
+
+				if(glowingAmount > 0)
+					target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, glowingAmount, 0, false, false));
 
 				if(target == directTarget)
 					target.damage(source, fireworkDamage);
@@ -95,6 +134,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 	private void fireworkfrenzy$spawnPotionCloud(CallbackInfo info) {
 		ItemStack stack = dataTracker.get(ITEM);
 		NbtCompound tag = stack.isEmpty() ? null : stack.getSubNbt("Fireworks");
+		FireworkRocketItem.Type type = FireworkRocketItem.Type.SMALL_BALL;
 
 		if(tag != null) {
 			NbtList nbtList = tag.getList("Explosions", NbtElement.COMPOUND_TYPE);
@@ -102,19 +142,20 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 			for(int i = 0; i < nbtList.size(); i++) {
 				NbtCompound nbt = nbtList.getCompound(i);
 
-				if(nbt.contains("Potion")) {
-					Potion potion = Registries.POTION.get(new Identifier(nbt.getString("Potion")));
-					PotionCloudEntity cloud = FireworkFrenzy.POTION_CLOUD.create(world);
+				if(nbt.contains("Type"))
+					type = FireworkRocketItem.Type.values()[nbt.getByte("Type")];
+			}
 
-					if(cloud != null) {
-						cloud.setPotion(potion);
-						cloud.setRadius(2.5F);
-						cloud.setOwner(shooter);
-						cloud.setDuration(200);
-						cloud.setWaitTime(0);
-						cloud.setPosition(getPos().add(0, -cloud.getRadius(), 0));
-						world.spawnEntity(cloud);
-					}
+			if(type == FireworkRocketItem.Type.STAR) {
+				DamageCloudEntity cloud = FireworkFrenzy.DAMAGE_CLOUD.create(world);
+
+				if(cloud != null) {
+					cloud.setRadius(blastSize);
+					cloud.setOwner(shooter);
+					cloud.setDuration(200);
+					cloud.setColor(0xf8d26a);
+					cloud.setPosition(getPos().add(0, -cloud.getRadius(), 0));
+					world.spawnEntity(cloud);
 				}
 			}
 		}
