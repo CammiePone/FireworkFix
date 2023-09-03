@@ -4,20 +4,23 @@
 	"version": "${version}",
 	"name": "Firework Frenzy",
 	"description": "An overhaul to Firework Rockets and how the Crossbow makes use of them.",
-	"authors": ["Cammie"],
+	"authors": [
+		"Cammie",
+		"ApoWillow"
+	],
 	"contact": {},
 	"license": "Custom License",
 	"icon": "assets/fireworkfrenzy/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"dev.cammiescorner.fireworkfrenzy.FireworkFrenzy"
+			"com.apowillow.fireworkfrenzy.FireworkFrenzy"
 		],
 		"client": [
-			"dev.cammiescorner.fireworkfrenzy.client.FireworkFrenzyClient"
+			"com.apowillow.fireworkfrenzy.client.FireworkFrenzyClient"
 		],
 		"modmenu": [
-			"dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyModMenu"
+			"com.apowillow.fireworkfrenzy.integration.FireworkFrenzyModMenu"
 		]
 	},
 	"mixins": [
@@ -25,9 +28,9 @@
 	],
 	"accessWidener": "META-INF/fireworkfrenzy.accesswidener",
 	"depends": {
-		"fabricloader": ">=0.14.14",
+		"fabricloader": ">=0.14.22",
 		"fabric": "*",
-		"minecraft": "1.19.3",
-		"midnightlib": ">=1.1.0"
+		"minecraft": "1.20.1",
+		"midnightlib": ">=1.4.1"
 	}
 }

@@ -1,8 +1,8 @@
-package dev.cammiescorner.fireworkfrenzy.mixin.client;
+package com.apowillow.fireworkfrenzy.mixin.client;
 
 import com.mojang.authlib.GameProfile;
-import dev.cammiescorner.fireworkfrenzy.client.sound.BlastJumpingSoundInstance;
-import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
+import com.apowillow.fireworkfrenzy.client.sound.BlastJumpingSoundInstance;
+import com.apowillow.fireworkfrenzy.util.BlastJumper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;

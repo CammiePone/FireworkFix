@@ -1,9 +1,9 @@
-package dev.cammiescorner.fireworkfrenzy;
+package com.apowillow.fireworkfrenzy;
 
-import dev.cammiescorner.fireworkfrenzy.enchantments.AirStrikeEnchantment;
-import dev.cammiescorner.fireworkfrenzy.enchantments.TakeoffEnchantment;
-import dev.cammiescorner.fireworkfrenzy.entities.DamageCloudEntity;
-import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
+import com.apowillow.fireworkfrenzy.enchantments.AirStrikeEnchantment;
+import com.apowillow.fireworkfrenzy.enchantments.TakeoffEnchantment;
+import com.apowillow.fireworkfrenzy.entities.DamageCloudEntity;
+import com.apowillow.fireworkfrenzy.integration.FireworkFrenzyConfig;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;

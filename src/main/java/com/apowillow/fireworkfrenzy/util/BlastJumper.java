@@ -1,4 +1,4 @@
-package dev.cammiescorner.fireworkfrenzy.util;
+package com.apowillow.fireworkfrenzy.util;
 
 public interface BlastJumper {
 	boolean isBlastJumping();

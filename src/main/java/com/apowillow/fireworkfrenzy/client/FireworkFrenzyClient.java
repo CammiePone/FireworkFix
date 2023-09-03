@@ -1,6 +1,6 @@
-package dev.cammiescorner.fireworkfrenzy.client;
+package com.apowillow.fireworkfrenzy.client;
 
-import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
+import com.apowillow.fireworkfrenzy.FireworkFrenzy;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;

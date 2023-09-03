@@ -1,8 +1,8 @@
-package dev.cammiescorner.fireworkfrenzy.mixin;
+package com.apowillow.fireworkfrenzy.mixin;
 
-import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
-import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
-import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
+import com.apowillow.fireworkfrenzy.FireworkFrenzy;
+import com.apowillow.fireworkfrenzy.integration.FireworkFrenzyConfig;
+import com.apowillow.fireworkfrenzy.util.BlastJumper;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;

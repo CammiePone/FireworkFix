@@ -1,4 +1,4 @@
-package dev.cammiescorner.fireworkfrenzy.enchantments;
+package com.apowillow.fireworkfrenzy.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;

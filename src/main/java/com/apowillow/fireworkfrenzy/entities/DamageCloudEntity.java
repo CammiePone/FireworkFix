@@ -1,4 +1,4 @@
-package dev.cammiescorner.fireworkfrenzy.entities;
+package com.apowillow.fireworkfrenzy.entities;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
@@ -15,11 +15,11 @@ public class DamageCloudEntity extends AreaEffectCloudEntity {
 	public void tick() {
 		super.tick();
 
-		List<LivingEntity> affectedEntities = world.getNonSpectatingEntities(LivingEntity.class, getBoundingBox());
+		List<LivingEntity> affectedEntities = getWorld().getNonSpectatingEntities(LivingEntity.class, getBoundingBox());
 
 		for(LivingEntity target : affectedEntities)
 			if(age % 10 == 0)
-				target.damage(DamageSource.explosion(this, getOwner()), 4);
+				target.damage(getDamageSources().explosion(this, getOwner()), 4);
 	}
 
 	@Override

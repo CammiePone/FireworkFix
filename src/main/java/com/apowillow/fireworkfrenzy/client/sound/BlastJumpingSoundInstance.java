@@ -1,6 +1,6 @@
-package dev.cammiescorner.fireworkfrenzy.client.sound;
+package com.apowillow.fireworkfrenzy.client.sound;
 
-import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
+import com.apowillow.fireworkfrenzy.util.BlastJumper;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.sound.MovingSoundInstance;
 import net.minecraft.sound.SoundCategory;
