@@ -1,15 +1,12 @@
-package dev.cammiescorner.fireworkfrenzy.mixin;
+package com.apowillow.fireworkfrenzy.mixin;
 
-import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
-import dev.cammiescorner.fireworkfrenzy.entities.DamageCloudEntity;
-import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
-import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
+import com.apowillow.fireworkfrenzy.FireworkFrenzy;
+import com.apowillow.fireworkfrenzy.entities.DamageCloudEntity;
+import com.apowillow.fireworkfrenzy.integration.FireworkFrenzyConfig;
+import com.apowillow.fireworkfrenzy.util.BlastJumper;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.FlyingItemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.*;
+import net.minecraft.entity.damage.*;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -53,6 +50,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 	@Unique public float knockbackAmount = 1F;
 	@Unique public int glowingAmount = 0;
 
+
 	public FireworkRocketEntityMixin(EntityType<? extends ProjectileEntity> type, World world) { super(type, world); }
 
 	@ModifyArg(method = "explode", at = @At(value = "INVOKE",
@@ -95,7 +93,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 		if(FireworkFrenzyConfig.allowRocketJumping && hasExplosionEffects() && tag != null) {
 			float radius = blastSize / 2;
 			double multiplier = (nbtList.size() * 0.4) * FireworkFrenzyConfig.rocketJumpMultiplier * knockbackAmount;
-			DamageSource source = DamageSource.firework(self, getOwner());
+			DamageSource source = getDamageSources().fireworks(self, getOwner());
 
 			if(!target.blockedByShield(source)) {
 				Vec3d targetPos = target.getPos().add(0, MathHelper.clamp(getY() - target.getY(), 0, target.getHeight()), 0);
@@ -117,7 +115,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				else
 					target.damage(source, (float) (fireworkDamage * inverseDistance));
 
-				target.knockbackVelocity = 0F;
+				target.takeKnockback(0F, 0F, 0F);
 				target.setVelocity(target.getVelocity().getX(), Math.min(1D, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());
 				target.setVelocity(target.getVelocity().add(direction).multiply(inverseDistance * (target == getOwner() ? multiplier : multiplier * FireworkFrenzyConfig.otherEntityKnockBack)));
 				target.velocityModified = true;
@@ -147,7 +145,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 			}
 
 			if(type == FireworkRocketItem.Type.STAR) {
-				DamageCloudEntity cloud = FireworkFrenzy.DAMAGE_CLOUD.create(world);
+				DamageCloudEntity cloud = FireworkFrenzy.DAMAGE_CLOUD.create(getWorld());
 
 				if(cloud != null) {
 					cloud.setRadius(blastSize);
@@ -155,7 +153,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 					cloud.setDuration(200);
 					cloud.setColor(0xf8d26a);
 					cloud.setPosition(getPos().add(0, -cloud.getRadius(), 0));
-					world.spawnEntity(cloud);
+					getWorld().spawnEntity(cloud);
 				}
 			}
 		}

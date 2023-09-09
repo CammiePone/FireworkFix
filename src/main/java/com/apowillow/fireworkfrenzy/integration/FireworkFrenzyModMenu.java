@@ -1,8 +1,8 @@
-package dev.cammiescorner.fireworkfrenzy.integration;
+package com.apowillow.fireworkfrenzy.integration;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
+import com.apowillow.fireworkfrenzy.FireworkFrenzy;
 
 public class FireworkFrenzyModMenu implements ModMenuApi {
 	@Override

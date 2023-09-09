@@ -1,8 +1,8 @@
-package dev.cammiescorner.fireworkfrenzy.mixin;
+package com.apowillow.fireworkfrenzy.mixin;
 
-import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
-import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
-import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
+import com.apowillow.fireworkfrenzy.FireworkFrenzy;
+import com.apowillow.fireworkfrenzy.integration.FireworkFrenzyConfig;
+import com.apowillow.fireworkfrenzy.util.BlastJumper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -25,9 +25,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements BlastJum
 	@Inject(method = "tick", at = @At("TAIL"))
 	public void fireworkfrenzy$tick(CallbackInfo info) {
 		if(isBlastJumping()) {
-			airStrafingSpeed *= FireworkFrenzyConfig.airStrafingMultiplier;
+			double airStrafingSpeed = FireworkFrenzyConfig.airStrafingMultiplier;
 
-			if(!world.isClient() && (isOnGround() || isSubmergedInWater()))
+			if(!getWorld().isClient() && (isOnGround() || isSubmergedInWater()))
 				setTimeOnGround(getTimeOnGround() + 1);
 
 			if(getTimeOnGround() > 2 || hasVehicle() || (FireworkFrenzyConfig.elytraCancelsRocketJumping && isFallFlying()) || !isAlive())

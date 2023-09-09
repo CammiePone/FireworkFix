@@ -1,6 +1,6 @@
-package dev.cammiescorner.fireworkfrenzy.mixin;
+package com.apowillow.fireworkfrenzy.mixin;
 
-import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
+import com.apowillow.fireworkfrenzy.integration.FireworkFrenzyConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.InfinityEnchantment;

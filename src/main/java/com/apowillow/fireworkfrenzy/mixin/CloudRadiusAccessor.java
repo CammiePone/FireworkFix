@@ -1,4 +1,4 @@
-package dev.cammiescorner.fireworkfrenzy.mixin;
+package com.apowillow.fireworkfrenzy.mixin;
 
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.data.TrackedData;
