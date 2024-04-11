@@ -1,13 +1,13 @@
-package dev.cammiescorner.fireworkfrenzy.enchantments;
+package dev.cammiescorner.fireworkfrenzy.common.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 
-public class AirStrikeEnchantment extends Enchantment {
-	public AirStrikeEnchantment() {
-		super(Rarity.UNCOMMON, EnchantmentTarget.CROSSBOW, new EquipmentSlot[] {EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+public class TakeoffEnchantment extends Enchantment {
+	public TakeoffEnchantment() {
+		super(Rarity.UNCOMMON, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[] {EquipmentSlot.FEET});
 	}
 
 	@Override
@@ -22,6 +22,6 @@ public class AirStrikeEnchantment extends Enchantment {
 
 	@Override
 	protected boolean canAccept(Enchantment other) {
-		return other != Enchantments.QUICK_CHARGE && super.canAccept(other);
+		return other != Enchantments.FEATHER_FALLING && super.canAccept(other);
 	}
 }

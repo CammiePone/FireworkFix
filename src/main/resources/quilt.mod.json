@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "dev.cammiescorner",
+    "id": "fireworkfrenzy",
+    "version": "${version}",
+    "metadata": {
+      "name": "Firework Frenzy",
+      "description": "An overhaul to Firework Rockets and how the Crossbow makes use of them",
+      "contributors": {
+        "Cammie": "Owner",
+        "Up": "Author"
+      },
+      "contact": {
+        "homepage": "https://cammiescorner.dev",
+        "issues": "https://github.com/CammiePone/FireworkFix/issues",
+        "sources": "https://github.com/CammiePone/FireworkFix"
+      },
+      "license": {
+        "name": "Custom License",
+        "id": "Custom License",
+        "url": "https://github.com/CammiePone/FireworkFix/blob/HEAD/LICENSE.md",
+        "description": "This license permits small portions of the code to be used without prior permission, but not large parts."
+      },
+      "icon": "assets/fireworkfrenzy/icon.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "entrypoints": {
+      "init": "dev.cammiescorner.fireworkfrenzy.FireworkFrenzy",
+      "client_init": "dev.cammiescorner.fireworkfrenzy.client.FireworkFrenzyClient",
+      "modmenu": "dev.cammiescorner.fireworkfrenzy.common.compat.FireworkFrenzyModMenu"
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "versions": ">=0.18.1-"
+      },
+      {
+        "id": "quilted_fabric_api",
+        "versions": ">=5.0.0-",
+        "mc-publish": {
+          "curseforge": "634179",
+          "modrinth": "qvIfYCYJ"
+        }
+      },
+      {
+        "id": "minecraft",
+        "versions": "=1.20.1"
+      },
+      {
+        "id": "midnightlib",
+        "mc-publish": {
+          "curseforge": "488090",
+          "modrinth": "codAaoxh"
+        }
+      }
+    ]
+  },
+  "access_widener": "fireworkfrenzy.accesswidener",
+  "mixin": "fireworkfrenzy.mixins.json"
+}

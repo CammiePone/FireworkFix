@@ -2,7 +2,7 @@ package dev.cammiescorner.fireworkfrenzy.mixin.client;
 
 import com.mojang.authlib.GameProfile;
 import dev.cammiescorner.fireworkfrenzy.client.sound.BlastJumpingSoundInstance;
-import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
+import dev.cammiescorner.fireworkfrenzy.common.util.BlastJumper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -21,7 +21,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 
 	public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) { super(world, profile); }
 
-	@Inject(method = "onTrackedDataSet", at = @At("HEAD"))
+	@Inject(method = "onTrackedDataUpdate", at = @At("HEAD"))
 	public void fireworkfrenzy$onTrackedDataSet(TrackedData<?> data, CallbackInfo info) {
 		BlastJumpingSoundInstance soundInstance = new BlastJumpingSoundInstance((ClientPlayerEntity) (Object) this);
 

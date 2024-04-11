@@ -1,4 +1,4 @@
-package dev.cammiescorner.fireworkfrenzy.util;
+package dev.cammiescorner.fireworkfrenzy.common.util;
 
 public interface BlastJumper {
 	boolean isBlastJumping();

@@ -1,4 +1,4 @@
-package dev.cammiescorner.fireworkfrenzy.integration;
+package dev.cammiescorner.fireworkfrenzy.common.compat;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

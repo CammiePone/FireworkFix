@@ -1,7 +1,7 @@
 package dev.cammiescorner.fireworkfrenzy.mixin;
 
-import dev.cammiescorner.fireworkfrenzy.integration.FireworkFrenzyConfig;
-import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
+import dev.cammiescorner.fireworkfrenzy.common.compat.FireworkFrenzyConfig;
+import dev.cammiescorner.fireworkfrenzy.common.util.BlastJumper;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FireworkRocketItem;

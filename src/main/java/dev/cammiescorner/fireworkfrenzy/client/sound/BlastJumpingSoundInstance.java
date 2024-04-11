@@ -1,18 +1,18 @@
 package dev.cammiescorner.fireworkfrenzy.client.sound;
 
-import dev.cammiescorner.fireworkfrenzy.util.BlastJumper;
+import dev.cammiescorner.fireworkfrenzy.common.util.BlastJumper;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.sound.MovingSoundInstance;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.random.RandomGenerator;
 
 public class BlastJumpingSoundInstance extends MovingSoundInstance {
 	private final ClientPlayerEntity player;
 	private int tickCount;
 
 	public BlastJumpingSoundInstance(ClientPlayerEntity player) {
-		super(SoundEvents.ITEM_ELYTRA_FLYING, SoundCategory.PLAYERS, Random.create());
+		super(SoundEvents.ITEM_ELYTRA_FLYING, SoundCategory.PLAYERS, RandomGenerator.createLegacy());
 		this.player = player;
 		this.repeat = true;
 		this.repeatDelay = 0;

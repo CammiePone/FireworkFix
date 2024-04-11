@@ -1,4 +1,4 @@
-package dev.cammiescorner.fireworkfrenzy.integration;
+package dev.cammiescorner.fireworkfrenzy.common.compat;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 
