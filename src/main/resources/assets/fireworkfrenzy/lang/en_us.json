@@ -5,11 +5,16 @@
 	"enchantment.fireworkfrenzy.air_strike": "Air Strike",
   "enchantment.fireworkfrenzy.fixed_fuse": "Fixed Fuse",
 
+  "enchantment.fireworkfrenzy.takeoff.desc": "Removes self-damage from your own rockets. Hope you're good at clutching.",
+  "enchantment.fireworkfrenzy.air_strike.desc": "Decreases the Crossbow charge time while rocket jumping.",
+  "enchantment.fireworkfrenzy.fixed_fuse.desc": "Removes the random fuse timer from Firework Rockets, allowing for mid-air jumps.",
+
 	"fireworkfrenzy.midnightconfig.title": "Firework Frenzy",
 	"fireworkfrenzy.midnightconfig.airStrikeJumpingChargeTime": "Air Strike Charge Time While Rocket Jumping",
 	"fireworkfrenzy.midnightconfig.airStrikeGroundedChargeTime": "Air Strike Charge Time While Grounded",
 	"fireworkfrenzy.midnightconfig.mobDamage": "Base Firework Rocket Damage Against Mobs",
 	"fireworkfrenzy.midnightconfig.playerDamage": "Base Firework Rocket Damage Against Players",
+  "fireworkfrenzy.midnightconfig.fireballDamageBonus": "Extra Damage Added By a Fire Charge",
 	"fireworkfrenzy.midnightconfig.rocketJumpMultiplier": "Rocket Jump Multiplier",
 	"fireworkfrenzy.midnightconfig.otherEntityKnockBack": "Other Entity Knockback Multiplier",
 	"fireworkfrenzy.midnightconfig.airStrafingMultiplier": "Rocket Jumping Air Strafing Multiplier",

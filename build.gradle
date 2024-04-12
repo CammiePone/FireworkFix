@@ -48,6 +48,7 @@ dependencies {
 	modImplementation libs.quilted.fabric.api
 	modImplementation libs.modmenu
 	modImplementation libs.midnightlib
+	modImplementation libs.explosive.enhancement
 }
 
 processResources {

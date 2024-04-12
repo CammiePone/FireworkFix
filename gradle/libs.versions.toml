@@ -7,6 +7,7 @@ quilt_loader = "0.24.0"
 quilted_fabric_api = "7.3.1+0.89.3-1.20.1"
 modmenu = "7.2.2"
 midnightlib = "1.4.1-quilt"
+explosive_enhancement = "1.2.2-1.20.x"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -17,6 +18,7 @@ quilted_fabric_api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-a
 quilted_fabric_api_deprecated = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api-deprecated", version.ref = "quilted_fabric_api" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 midnightlib = { module = "maven.modrinth:midnightlib", version.ref = "midnightlib" }
+explosive_enhancement = { module = "maven.modrinth:explosive-enhancement", version.ref = "explosive_enhancement" }
 
 # If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
 [bundles]

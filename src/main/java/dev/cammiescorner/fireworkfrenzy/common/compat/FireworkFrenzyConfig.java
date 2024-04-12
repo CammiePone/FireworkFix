@@ -7,6 +7,7 @@ public class FireworkFrenzyConfig extends MidnightConfig {
 	@Entry public static int airStrikeGroundedChargeTime = 40;
 	@Entry public static float mobDamage = 3F;
 	@Entry public static float playerDamage = 3F;
+	@Entry public static float fireballDamageBonus = 4F;
 	@Entry public static double rocketJumpMultiplier = 1D;
 	@Entry public static double otherEntityKnockBack = 0.5D;
 	@Entry public static double airStrafingMultiplier = 3D;

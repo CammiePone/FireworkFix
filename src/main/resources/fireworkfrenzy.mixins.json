@@ -9,6 +9,7 @@
 		"CrossbowItemMixin",
 		"FireworkRocketEntityMixin",
 		"FireworkRocketItemMixin",
+		"FireworkRocketRecipeMixin",
 		"InfinityEnchantmentMixin",
 		"PlayerEntityMixin"
 	],

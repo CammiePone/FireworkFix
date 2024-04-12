@@ -35,9 +35,9 @@ public abstract class FireworkRocketItemMixin extends Item {
 
 	@Inject(method = "appendTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/NbtList;isEmpty()Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
 	public void fireworkfrenzy$appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo info, NbtCompound nbtCompound, NbtList nbtList) {
-		if(FireworkFrenzyConfig.showTooltip && nbtList.size() > 0)
+		if(FireworkFrenzyConfig.showTooltip && !nbtList.isEmpty())
 			tooltip.add(Text.translatable(getTranslationKey() + ".damage").append(" ")
-					.append(String.valueOf(FireworkFrenzyConfig.mobDamage * nbtList.size()))
+					.append(String.valueOf(FireworkFrenzyConfig.mobDamage * nbtList.size() + (nbtCompound.getBoolean("Fireball") ? FireworkFrenzyConfig.fireballDamageBonus : 0)))
 					.formatted(Formatting.GRAY));
 	}
 }
