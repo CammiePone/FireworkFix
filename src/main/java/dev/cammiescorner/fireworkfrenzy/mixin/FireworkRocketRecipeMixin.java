@@ -17,6 +17,7 @@ import net.minecraft.recipe.SpecialCraftingRecipe;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import org.quiltmc.loader.api.QuiltLoader;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -45,7 +46,7 @@ public abstract class FireworkRocketRecipeMixin extends SpecialCraftingRecipe {
 		target = "Lnet/minecraft/recipe/Ingredient;test(Lnet/minecraft/item/ItemStack;)Z")
 	)
 	public boolean fireworkfrenzy$allowFireball(boolean original, RecipeInputInventory recipeInputInventory, World world, @Share("itemStack") LocalRef<ItemStack> stackRef) {
-		return original || FIREBALL.test(stackRef.get());
+		return original || (QuiltLoader.isModLoaded("explosiveenhancement") && FIREBALL.test(stackRef.get()));
 	}
 
 
@@ -53,6 +54,9 @@ public abstract class FireworkRocketRecipeMixin extends SpecialCraftingRecipe {
 		target = "Lnet/minecraft/nbt/NbtCompound;putByte(Ljava/lang/String;B)V"
 	), locals = LocalCapture.CAPTURE_FAILSOFT)
 	public void fireworkfrenzy$addFireballTag(RecipeInputInventory recipeInputInventory, DynamicRegistryManager dynamicRegistryManager, CallbackInfoReturnable<ItemStack> cir, ItemStack itemStack, NbtCompound nbtCompound, NbtList nbtList, int i) {
+		if(!QuiltLoader.isModLoaded("explosiveenhancement"))
+			return;
+
 		for(int i1 = 0; i1 < recipeInputInventory.size(); i1++) {
 			ItemStack itemStack2 = recipeInputInventory.getStack(i1);
 

@@ -14,7 +14,7 @@
 	"fireworkfrenzy.midnightconfig.airStrikeGroundedChargeTime": "Air Strike Charge Time While Grounded",
 	"fireworkfrenzy.midnightconfig.mobDamage": "Base Firework Rocket Damage Against Mobs",
 	"fireworkfrenzy.midnightconfig.playerDamage": "Base Firework Rocket Damage Against Players",
-  "fireworkfrenzy.midnightconfig.fireballDamageBonus": "Extra Damage Added By a Fire Charge",
+  "fireworkfrenzy.midnightconfig.fireballDamageBonus": "Extra Damage Added By a Fire Charge (Explosive Enhancement)",
 	"fireworkfrenzy.midnightconfig.rocketJumpMultiplier": "Rocket Jump Multiplier",
 	"fireworkfrenzy.midnightconfig.otherEntityKnockBack": "Other Entity Knockback Multiplier",
 	"fireworkfrenzy.midnightconfig.airStrafingMultiplier": "Rocket Jumping Air Strafing Multiplier",
