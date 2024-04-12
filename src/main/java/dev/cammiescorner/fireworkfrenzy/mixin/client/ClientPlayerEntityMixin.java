@@ -1,5 +1,6 @@
 package dev.cammiescorner.fireworkfrenzy.mixin.client;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.authlib.GameProfile;
 import dev.cammiescorner.fireworkfrenzy.client.sound.BlastJumpingSoundInstance;
 import dev.cammiescorner.fireworkfrenzy.common.util.BlastJumper;
@@ -27,5 +28,12 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 
 		if(isBlastJumping() && !client.getSoundManager().isPlaying(soundInstance))
 			client.getSoundManager().play(soundInstance);
+	}
+
+	@ModifyExpressionValue(method = "tickMovement", at = @At(value = "INVOKE",
+			target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"
+	))
+	public boolean fireworkfrenzy$noSlowDownWhileRocketJumping(boolean original) {
+		return original && !isBlastJumping();
 	}
 }

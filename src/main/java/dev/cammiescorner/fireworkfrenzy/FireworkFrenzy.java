@@ -8,15 +8,22 @@ import dev.cammiescorner.fireworkfrenzy.common.compat.FireworkFrenzyConfig;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 
@@ -29,6 +36,7 @@ public class FireworkFrenzy implements ModInitializer {
 	public static Enchantment AIR_STRIKE;
 	public static Enchantment FIXED_FUSE;
 	public static EntityType<DamageCloudEntity> DAMAGE_CLOUD;
+	public static final RegistryKey<DamageType> DAMAGE_TYPE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(MOD_ID, "damage_cloud"));
 
 	@Override
 	public void onInitialize(ModContainer mod) {
@@ -38,5 +46,9 @@ public class FireworkFrenzy implements ModInitializer {
 		AIR_STRIKE = Registry.register(Registries.ENCHANTMENT, new Identifier(MOD_ID, "air_strike"), new AirStrikeEnchantment());
 		FIXED_FUSE = Registry.register(Registries.ENCHANTMENT, new Identifier(MOD_ID, "fixed_fuse"), new FixedFuseEnchantment());
 		DAMAGE_CLOUD = Registry.register(Registries.ENTITY_TYPE, new Identifier(MOD_ID, "potion_cloud"), FabricEntityTypeBuilder.create().entityFactory(DamageCloudEntity::new).fireImmune().dimensions(EntityDimensions.changing(6F, 6F)).build());
+	}
+
+	public static DamageSource damageCloud(DamageCloudEntity cloud, @Nullable Entity owner) {
+		return new DamageSource(cloud.getWorld().getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).getHolderOrThrow(DAMAGE_TYPE), cloud, owner);
 	}
 }

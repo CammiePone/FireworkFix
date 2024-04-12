@@ -22,7 +22,7 @@ public class DamageCloudEntity extends AreaEffectCloudEntity {
 
 		for(LivingEntity target : affectedEntities)
 			if(age % 10 == 0)
-				target.damage(new DamageSource(Holder.createDirect(new DamageType(FireworkFrenzy.MOD_ID + ".damage_cloud", 1)), this), 4);
+				target.damage(FireworkFrenzy.damageCloud(this, getOwner()), 4);
 	}
 
 	@Override

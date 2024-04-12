@@ -3,11 +3,13 @@ package dev.cammiescorner.fireworkfrenzy.common.compat;
 import eu.midnightdust.lib.config.MidnightConfig;
 
 public class FireworkFrenzyConfig extends MidnightConfig {
-	@Entry public static int airStrikeJumpingChargeTime = 3;
-	@Entry public static int airStrikeGroundedChargeTime = 40;
+	@Entry public static int crossbowChargeTime = 20;
+	@Entry public static int quickChargeModifier = 5;
+	@Entry public static int airStrikeJumpingChargeTime = 2;
+	@Entry public static int airStrikeGroundedChargeTime = 30;
 	@Entry public static float mobDamage = 3F;
 	@Entry public static float playerDamage = 3F;
-	@Entry public static float fireballDamageBonus = 4F;
+	@Entry public static float fireballDamageBonus = 6F;
 	@Entry public static double rocketJumpMultiplier = 1D;
 	@Entry public static double otherEntityKnockBack = 0.5D;
 	@Entry public static double airStrafingMultiplier = 3D;
