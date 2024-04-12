@@ -6,36 +6,37 @@
 
 Firework Frenzy is a mod that overhauls how Firework Rockets are used in conjunction with the crossbow.
 
-<br>
-
 <details>
     <summary>All Changes Made to Firework Rockets</summary>
 
 ---
-- Self-damage no longer gives invincibility frames
-- Damage now scales linearly with the number of Firework Stars
-  - Base-damage of Firework Rockets reduced from 6 to 3
-  - Tooltip displays maximum damage of Firework Rocket
-  - Does not affect Firework Rockets used for Elytra Flight
-- Rocket Jumping exists
-  - Knockback based on Firework Stars in Firework Rocket
 
-**Damage Table:**
-
-| Firework Stars | Vanilla Damage | FireworkFix Damage* |
-| :------------: | :------------: | :-----------------: |
-| 0              | 0.0            | 0.0                 |
-| 1              | 6.0            | 3.0                 |
-| 2              | 8.0            | 6.0                 |
-| 3              | 10.0           | 9.0                |
-| 4              | 12.0           | 12.0                |
-| 5              | 14.0           | 15.0                |
-| 6              | 16.0           | 18.0                |
-| 7              | 17.0           | 21.0                |
----
+- Firework Rocket damage scales linearly with the number of Firework Stars used when making them
+    <details>
+        <summary>Damage Scaling Table</summary>
+    
+    | Firework Stars | Vanilla Damage | FireworkFix Damage* |
+    | :------------: | :------------: | :-----------------: |
+    | 0              | 0.0            | 0.0                 |
+    | 1              | 6.0            | 3.0                 |
+    | 2              | 8.0            | 6.0                 |
+    | 3              | 10.0           | 9.0                |
+    | 4              | 12.0           | 12.0                |
+    | 5              | 14.0           | 15.0                |
+    | 6              | 16.0           | 18.0                |
+    | 7              | 17.0           | 21.0                |
+    </details>
+- Large Ball Firework Stars have an increased explosion radius
+- Burst Firework Stars have a 25% chance of disabling shields
+- Star Firework Stars leave a damaging cloud upon exploding
+- Adding the Trail effect to Firework Stars will increase knockback taken from rockets
+- Adding the Flicker effect to Firework Stars will apply glowing to entities hit by the rockets
+- Three New Enchantments!
+  - Takeoff - A Boot enchantment that allows you to take no damage from your own Firework Rockets. Incompatible with Feather Falling
+  - Air Strike - A Crossbow enchantment that makes it slower to reload on the ground, but while rocket jumping, it can rapidly reload and fire the Crossbow. Incompatible with Quick Charge
+  - Fixed Fuse - A Crossbow enchantment that gives Firework Rockets shot from it a fixed fuse time, allowing skilled players to do mid-air jumps with precise timing. Incompatible with Multishot
+- Optional compat with [Explosive Enhancement](https://www.modrinth.com/mod/explosive-enhancement), allowing for fancier explosion particles when a Firework Star is replaced with a Fire Charge
 </details>
-<br>
-Every part of the mod is configurable in-game with ModMenu.
 
 ---
 
