@@ -9,10 +9,7 @@ import dev.cammiescorner.fireworkfrenzy.common.entities.DamageCloudEntity;
 import dev.cammiescorner.fireworkfrenzy.common.compat.FireworkFrenzyConfig;
 import dev.cammiescorner.fireworkfrenzy.common.util.BlastJumper;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.FlyingItemEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -115,13 +112,13 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				Vec3d targetPos = target.getPos().add(0, MathHelper.clamp(getY() - target.getY(), 0, target.getHeight()), 0);
 				Vec3d direction = targetPos.subtract(getPos());
 				double distance = direction.length() - (getWidth() * 0.5) - (target.getWidth() * 0.5);
-				double inverseDistance = MathHelper.clamp(1 - (distance / radius), 0, 1);
+				double inverseDistance = MathHelper.clamp(1 - (distance / (radius * 2)), 0, 1);
 				float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * nbtList.size() + (tag.getBoolean("Fireball") ? FireworkFrenzyConfig.fireballDamageBonus : 0);
 
 				if(target == getOwner() && EnchantmentHelper.getLevel(FireworkFrenzy.TAKEOFF, target.getEquippedStack(EquipmentSlot.FEET)) > 0)
 					fireworkDamage = 0;
 				if(EnchantmentHelper.getLevel(FireworkFrenzy.AIR_STRIKE, stack) > 0 && getOwner() instanceof BlastJumper jumper && jumper.isBlastJumping())
-					fireworkDamage *= FireworkFrenzyConfig.airStrikeDamageMultiplier;
+					fireworkDamage *= (float) FireworkFrenzyConfig.airStrikeDamageMultiplier;
 
 				if(glowingAmount > 0)
 					target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, glowingAmount, 0, false, false));
@@ -175,8 +172,11 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				}
 			}
 
-			if(types.contains(FireworkRocketItem.Type.BURST) && targetRef.get() instanceof PlayerEntity player && player.isBlocking())
-				player.disableShield(false);
+			if(types.contains(FireworkRocketItem.Type.BURST) && targetRef.get() instanceof PlayerEntity player && player.isBlocking() && random.nextFloat() < FireworkFrenzyConfig.burstChanceToDisableShields) {
+				player.getItemCooldownManager().set(Items.SHIELD, 50);
+				player.clearActiveItem();
+				getWorld().sendEntityStatus(this, EntityStatuses.BREAK_SHIELD);
+			}
 		}
 	}
 
