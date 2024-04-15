@@ -115,6 +115,9 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				double inverseDistance = MathHelper.clamp(1 - (distance / (radius * 2)), 0, 1);
 				float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * nbtList.size() + (tag.getBoolean("Fireball") ? FireworkFrenzyConfig.fireballDamageBonus : 0);
 
+				if(FireworkFrenzyConfig.rocketsHaveFalloff && getOwner() != null)
+					fireworkDamage -= Math.round(Math.min(FireworkFrenzyConfig.minimumFalloffDamage, getPos().distanceTo(getOwner().getPos()) * FireworkFrenzyConfig.falloffPerMeter));
+
 				if(target == getOwner() && EnchantmentHelper.getLevel(FireworkFrenzy.TAKEOFF, target.getEquippedStack(EquipmentSlot.FEET)) > 0)
 					fireworkDamage = 0;
 				if(EnchantmentHelper.getLevel(FireworkFrenzy.AIR_STRIKE, stack) > 0 && getOwner() instanceof BlastJumper jumper && jumper.isBlastJumping())
