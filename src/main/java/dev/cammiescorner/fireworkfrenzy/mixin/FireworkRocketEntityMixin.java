@@ -116,7 +116,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * nbtList.size() + (tag.getBoolean("Fireball") ? FireworkFrenzyConfig.fireballDamageBonus : 0);
 
 				if(FireworkFrenzyConfig.rocketsHaveFalloff && getOwner() != null)
-					fireworkDamage -= Math.round(Math.min(FireworkFrenzyConfig.minimumFalloffDamage, getPos().distanceTo(getOwner().getPos()) * FireworkFrenzyConfig.falloffPerMeter));
+					fireworkDamage -= (float) Math.min(FireworkFrenzyConfig.minimumFalloffDamage, getPos().distanceTo(getOwner().getPos()) * FireworkFrenzyConfig.falloffPerMeter);
 
 				if(target == getOwner() && EnchantmentHelper.getLevel(FireworkFrenzy.TAKEOFF, target.getEquippedStack(EquipmentSlot.FEET)) > 0)
 					fireworkDamage = 0;
@@ -129,7 +129,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				if(target == directTarget)
 					target.damage(source, fireworkDamage);
 				else
-					target.damage(source, (float) (fireworkDamage * inverseDistance));
+					target.damage(source, (float) Math.max(1, fireworkDamage * inverseDistance));
 
 				if(FireworkFrenzyConfig.allowRocketJumping) {
 					double multiplier = (nbtList.size() * 0.4) * FireworkFrenzyConfig.rocketJumpMultiplier * knockbackAmount;
