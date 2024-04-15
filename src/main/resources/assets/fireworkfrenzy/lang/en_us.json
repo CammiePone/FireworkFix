@@ -10,32 +10,32 @@
 	"enchantment.fireworkfrenzy.fixed_fuse.desc": "Removes the random fuse timer from Firework Rockets, allowing for mid-air jumps.",
 
 	"fireworkfrenzy.midnightconfig.title": "Firework Frenzy",
-	"fireworkfrenzy.midnightconfig.crossbowchargetime": "Time it takes for the Crossbow to load",
-	"fireworkfrenzy.midnightconfig.quickchargemodifier": "Ticks per level quick charge removes from pull time",
+	"fireworkfrenzy.midnightconfig.crossbowChargeTime": "Time it takes for the Crossbow to load",
+	"fireworkfrenzy.midnightconfig.quickChargeModifier": "Ticks per level quick charge removes from pull time",
 
-	"fireworkfrenzy.midnightconfig.airstrikejumpingchargetime": "Air Strike charge time while rocket jumping",
-	"fireworkfrenzy.midnightconfig.airstrikegroundedchargetime": "Air Strike charge time while grounded",
-  "fireworkfrenzy.midnightconfig.airstrafingmultiplier": "Rocket jumping air strafing multiplier",
-  "fireworkfrenzy.midnightconfig.airstrikedamagemultiplier": "Air Strike damage multiplier while rocket jumping",
+	"fireworkfrenzy.midnightconfig.airStrikeJumpingChargeTime": "Air Strike charge time while rocket jumping",
+	"fireworkfrenzy.midnightconfig.airStrikeGroundedChargeTime": "Air Strike charge time while grounded",
+  "fireworkfrenzy.midnightconfig.airStrikeDamageMultiplier": "Air Strike damage multiplier while rocket jumping",
 
-	"fireworkfrenzy.midnightconfig.mobdamage": "Base firework rocket damage against mobs",
-	"fireworkfrenzy.midnightconfig.playerdamage": "Base firework rocket damage against players",
-	"fireworkfrenzy.midnightconfig.fireballdamagebonus": "Extra damage added by a fire charge (Explosive Enhancement Required)",
-  "fireworkfrenzy.midnightconfig.burstchancetodisableshields": "Chance for Burst fireworks to disable shields",
+	"fireworkfrenzy.midnightconfig.mobDamage": "Base firework rocket damage against mobs",
+	"fireworkfrenzy.midnightconfig.playerDamage": "Base firework rocket damage against players",
+	"fireworkfrenzy.midnightconfig.fireballDamageBonus": "Extra damage added by a fire charge (Explosive Enhancement Required)",
+  "fireworkfrenzy.midnightconfig.burstChanceToDisableShields": "Chance for Burst fireworks to disable shields",
 
-	"fireworkfrenzy.midnightconfig.rocketjumpmultiplier": "Rocket jump multiplier",
-	"fireworkfrenzy.midnightconfig.otherentityknockback": "Other entity knockback multiplier",
-  "fireworkfrenzy.midnightconfig.allowrocketjumping": "Allow rocket jumping",
-  "fireworkfrenzy.midnightconfig.elytracancelsrocketjumping": "Elytras cancel rocket jumping",
-  "fireworkfrenzy.midnightconfig.boostscancelrocketjumping": "Rocket boosts cancel rocket jumping",
+  "fireworkfrenzy.midnightconfig.allowRocketJumping": "Allow rocket jumping",
+	"fireworkfrenzy.midnightconfig.rocketJumpMultiplier": "Rocket jump multiplier",
+	"fireworkfrenzy.midnightconfig.otherEntityKnockBack": "Other entity knockback multiplier",
+  "fireworkfrenzy.midnightconfig.airStrafingMultiplier": "Rocket jumping air strafing multiplier",
+  "fireworkfrenzy.midnightconfig.elytraCancelsRocketJumping": "Elytra flight cancels rocket jumping",
+  "fireworkfrenzy.midnightconfig.boostsCancelRocketJumping": "Rocket boosts cancel rocket jumping",
 
-	"fireworkfrenzy.midnightconfig.crossbowsgetinfinity": "Crossbows can have Infinity",
-	"fireworkfrenzy.midnightconfig.infinityaffectsrockets": "Infinity works on firework rockets",
-  "fireworkfrenzy.midnightconfig.userocketsfrominv": "Use firework rockets from inventory",
+	"fireworkfrenzy.midnightconfig.crossbowsGetInfinity": "Crossbows can have Infinity",
+	"fireworkfrenzy.midnightconfig.infinityAffectsRockets": "Infinity works on firework rockets",
+  "fireworkfrenzy.midnightconfig.useRocketsFromInv": "Use firework rockets from inventory",
 
   "fireworkfrenzy.midnightconfig.rocketsHaveFalloff": "Firework rockets have damage falloff",
   "fireworkfrenzy.midnightconfig.falloffPerMeter": "Damage falloff per meter from shooter",
   "fireworkfrenzy.midnightconfig.minimumFalloffDamage": "Minimum damage from falloff",
 
-  "fireworkfrenzy.midnightconfig.showtooltip": "Show damage tooltip"
+  "fireworkfrenzy.midnightconfig.showTooltip": "Show damage tooltip"
 }
