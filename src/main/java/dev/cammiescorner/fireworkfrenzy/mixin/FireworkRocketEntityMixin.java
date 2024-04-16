@@ -17,6 +17,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.FireworkRocketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -24,11 +25,13 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.loader.api.QuiltLoader;
+import org.quiltmc.loader.impl.lib.sat4j.core.Vec;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -54,6 +57,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 	@Unique public float blastSize = 2F;
 	@Unique public float knockbackAmount = 1F;
 	@Unique public int glowingAmount = 0;
+	@Unique private final boolean spawnEnhancedBooms = QuiltLoader.isModLoaded("explosiveenhancement");
 
 	public FireworkRocketEntityMixin(EntityType<? extends ProjectileEntity> type, World world) { super(type, world); }
 
@@ -109,33 +113,41 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 			DamageSource source = getDamageSources().fireworks(self, getOwner());
 
 			if(!target.blockedByShield(source)) {
-				Vec3d targetPos = target.getPos().add(0, MathHelper.clamp(getY() - target.getY(), 0, target.getHeight()), 0);
-				Vec3d direction = targetPos.subtract(getPos());
-				double distance = direction.length() - (getWidth() * 0.5) - (target.getWidth() * 0.5);
-				double inverseDistance = MathHelper.clamp(1 - (distance / (radius * 2)), 0, 1);
-				float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * nbtList.size() + (tag.getBoolean("Fireball") ? FireworkFrenzyConfig.fireballDamageBonus : 0);
+				Vec3d adjustedPos = getPos().add(0, getHeight() / 2, 0);
+				Vec3d adjustedTargetPos = target.getPos().add(0, target.getHeight() / 2, 0);
+				HitResult hitResult = ProjectileUtil.raycast(this, adjustedPos, adjustedTargetPos, getBoundingBox().expand(blastSize), entity -> entity == target, adjustedPos.squaredDistanceTo(adjustedTargetPos));
 
-				if(FireworkFrenzyConfig.rocketsHaveFalloff && getOwner() != null)
-					fireworkDamage -= (float) Math.min(FireworkFrenzyConfig.maximumFalloffDamage, Math.max(0, getPos().distanceTo(getOwner().getPos()) - FireworkFrenzyConfig.startOfFalloff) * FireworkFrenzyConfig.falloffPerMeter);
+				if(hitResult != null && hitResult.getType() == HitResult.Type.ENTITY) {
+					double distance = hitResult.getPos().distanceTo(adjustedPos);
+					double inverseDistance = 1 / Math.max(0.0000000001, distance);
+					float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * nbtList.size() + (tag.getBoolean("Fireball") ? FireworkFrenzyConfig.fireballDamageBonus : 0);
 
-				if(target == getOwner() && EnchantmentHelper.getLevel(FireworkFrenzy.TAKEOFF, target.getEquippedStack(EquipmentSlot.FEET)) > 0)
-					fireworkDamage = 0;
-				if(EnchantmentHelper.getLevel(FireworkFrenzy.AIR_STRIKE, stack) > 0 && getOwner() instanceof BlastJumper jumper && jumper.isBlastJumping())
-					fireworkDamage *= (float) FireworkFrenzyConfig.airStrikeDamageMultiplier;
+					// calculate damage falloff
+					if(FireworkFrenzyConfig.rocketsHaveFalloff && getOwner() != null)
+						fireworkDamage = (float) Math.max(FireworkFrenzyConfig.minFalloffMultiplier * fireworkDamage, fireworkDamage - Math.max(0, getPos().distanceTo(getOwner().getPos()) - FireworkFrenzyConfig.startOfFalloff) * FireworkFrenzyConfig.falloffPerMeter);
 
-				if(glowingAmount > 0)
-					target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, glowingAmount, 0, false, false));
+					// calculate air strike damage
+					if(EnchantmentHelper.getLevel(FireworkFrenzy.AIR_STRIKE, stack) > 0 && getOwner() instanceof BlastJumper jumper && jumper.isBlastJumping())
+						fireworkDamage *= (float) FireworkFrenzyConfig.airStrikeDamageMultiplier;
 
-				if(target == directTarget)
-					target.damage(source, fireworkDamage);
-				else
-					target.damage(source, (float) Math.max(1, fireworkDamage * inverseDistance));
+					// remove damage from owner if wearing takeoff boots
+					if(target == getOwner() && EnchantmentHelper.getLevel(FireworkFrenzy.TAKEOFF, target.getEquippedStack(EquipmentSlot.FEET)) > 0)
+						fireworkDamage = 0;
 
-				if(FireworkFrenzyConfig.allowRocketJumping) {
-					double multiplier = (nbtList.size() * 0.4) * FireworkFrenzyConfig.rocketJumpMultiplier * knockbackAmount;
-					target.setVelocity(target.getVelocity().getX(), Math.min(1D, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());
-					target.setVelocity(target.getVelocity().add(direction).multiply(inverseDistance * (target == getOwner() ? multiplier : multiplier * FireworkFrenzyConfig.otherEntityKnockBack)));
-					target.velocityModified = true;
+					if(glowingAmount > 0)
+						target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, glowingAmount, 0, false, false));
+
+					if(target == directTarget)
+						target.damage(source, fireworkDamage);
+					else
+						target.damage(source, (float) Math.max(1, fireworkDamage * inverseDistance));
+
+					if(FireworkFrenzyConfig.allowRocketJumping) {
+						double multiplier = (nbtList.size() * 0.4) * FireworkFrenzyConfig.rocketJumpMultiplier * knockbackAmount;
+						target.setVelocity(target.getVelocity().getX(), Math.min(1D, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());
+						target.setVelocity(target.getVelocity().add(adjustedTargetPos.subtract(adjustedPos)).multiply(inverseDistance * (target == getOwner() ? multiplier : multiplier * FireworkFrenzyConfig.otherEntityKnockBack)));
+						target.velocityModified = true;
+					}
 				}
 			}
 		}
@@ -191,12 +203,12 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 
 	@WrapWithCondition(method = "handleStatus", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;addFireworkParticle(DDDDDDLnet/minecraft/nbt/NbtCompound;)V"))
 	public boolean fireworkfrenzy$yeet(World world, double d, double d1, double d2, double d3, double d4, double d5, NbtCompound nbtCompound) {
-		return !QuiltLoader.isModLoaded("explosiveenhancement");
+		return !spawnEnhancedBooms;
 	}
 
 	@Inject(method = "handleStatus", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;addFireworkParticle(DDDDDDLnet/minecraft/nbt/NbtCompound;)V"), locals = LocalCapture.CAPTURE_FAILSOFT)
 	public void fireworkfrenzy$particleTime(byte status, CallbackInfo info, ItemStack itemStack, NbtCompound tag, Vec3d vec3d) {
-		if(QuiltLoader.isModLoaded("explosiveenhancement")) {
+		if(spawnEnhancedBooms) {
 			if(tag.getBoolean("Fireball"))
 				ExplosiveEnhancementCompat.spawnEnhancedBooms(getWorld(), getX(), getY(), getZ(), 1.25f);
 			else

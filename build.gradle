@@ -49,6 +49,9 @@ dependencies {
 	modImplementation libs.modmenu
 	modImplementation libs.midnightlib
 	modImplementation libs.explosive.enhancement
+	modImplementation libs.yacl
+	modImplementation libs.dummy
+	modImplementation libs.moonlight
 }
 
 processResources {

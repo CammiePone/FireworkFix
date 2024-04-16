@@ -4,7 +4,7 @@ import eu.midnightdust.lib.config.MidnightConfig;
 
 public class FireworkFrenzyConfig extends MidnightConfig {
 	@Entry public static int crossbowChargeTime = 20;
-	@Entry public static int quickChargeModifier = 5;
+	@Entry public static int quickChargeModifier = 3;
 
 	@Entry public static int airStrikeJumpingChargeTime = 2;
 	@Entry public static int airStrikeGroundedChargeTime = 30;
@@ -28,7 +28,7 @@ public class FireworkFrenzyConfig extends MidnightConfig {
 
 	@Entry public static boolean rocketsHaveFalloff = true;
 	@Entry public static float falloffPerMeter = 1f;
-	@Entry public static float maximumFalloffDamage = 16f;
+	@Entry public static float minFalloffMultiplier = 0.3f;
 	@Entry public static float startOfFalloff = 3f;
 
 	@Entry public static boolean showTooltip = true;

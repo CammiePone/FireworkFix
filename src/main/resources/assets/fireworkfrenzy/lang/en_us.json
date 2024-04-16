@@ -35,7 +35,7 @@
 
   "fireworkfrenzy.midnightconfig.rocketsHaveFalloff": "Firework rockets have damage falloff",
   "fireworkfrenzy.midnightconfig.falloffPerMeter": "Damage falloff per meter from shooter",
-  "fireworkfrenzy.midnightconfig.maximumFalloffDamage": "Maximum damage lost from falloff",
+  "fireworkfrenzy.midnightconfig.minFalloffMultiplier": "Minimum percentage of damage done at max falloff",
   "fireworkfrenzy.midnightconfig.startOfFalloff": "Minimum distance away for damage falloff to be calculated",
 
   "fireworkfrenzy.midnightconfig.showTooltip": "Show damage tooltip"
