@@ -47,8 +47,8 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 	@Shadow protected abstract boolean hasExplosionEffects();
 
 	@Shadow private @Nullable LivingEntity shooter;
-
 	@Shadow private int lifeTime;
+
 	@Unique public FireworkRocketEntity self = (FireworkRocketEntity) (Object) this;
 	@Unique public LivingEntity directTarget;
 	@Unique public float blastSize = 2F;
@@ -116,7 +116,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * nbtList.size() + (tag.getBoolean("Fireball") ? FireworkFrenzyConfig.fireballDamageBonus : 0);
 
 				if(FireworkFrenzyConfig.rocketsHaveFalloff && getOwner() != null)
-					fireworkDamage -= (float) Math.min(FireworkFrenzyConfig.minimumFalloffDamage, getPos().distanceTo(getOwner().getPos()) * FireworkFrenzyConfig.falloffPerMeter);
+					fireworkDamage -= (float) Math.min(FireworkFrenzyConfig.maximumFalloffDamage, Math.max(0, getPos().distanceTo(getOwner().getPos()) - FireworkFrenzyConfig.startOfFalloff) * FireworkFrenzyConfig.falloffPerMeter);
 
 				if(target == getOwner() && EnchantmentHelper.getLevel(FireworkFrenzy.TAKEOFF, target.getEquippedStack(EquipmentSlot.FEET)) > 0)
 					fireworkDamage = 0;

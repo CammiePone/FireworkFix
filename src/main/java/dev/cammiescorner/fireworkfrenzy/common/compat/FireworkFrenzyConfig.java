@@ -28,7 +28,8 @@ public class FireworkFrenzyConfig extends MidnightConfig {
 
 	@Entry public static boolean rocketsHaveFalloff = true;
 	@Entry public static float falloffPerMeter = 1f;
-	@Entry public static float minimumFalloffDamage = 8f;
+	@Entry public static float maximumFalloffDamage = 16f;
+	@Entry public static float startOfFalloff = 3f;
 
 	@Entry public static boolean showTooltip = true;
 }
