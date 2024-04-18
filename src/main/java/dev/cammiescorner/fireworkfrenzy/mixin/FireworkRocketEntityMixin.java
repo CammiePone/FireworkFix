@@ -94,9 +94,9 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 		if(types.contains(FireworkRocketItem.Type.LARGE_BALL))
 			blastSize = 5F;
 		else if(types.contains(FireworkRocketItem.Type.STAR))
-			blastSize = 3F;
+			blastSize = 4F;
 		else
-			blastSize = 2F;
+			blastSize = 3F;
 
 		return blastSize;
 	}
@@ -109,7 +109,6 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 		targetRef.set(target);
 
 		if(hasExplosionEffects() && tag != null) {
-			float radius = blastSize / 2;
 			DamageSource source = getDamageSources().fireworks(self, getOwner());
 
 			if(!target.blockedByShield(source)) {
@@ -118,8 +117,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				HitResult hitResult = ProjectileUtil.raycast(this, adjustedPos, adjustedTargetPos, getBoundingBox().expand(blastSize), entity -> entity == target, adjustedPos.squaredDistanceTo(adjustedTargetPos));
 
 				if(hitResult != null && hitResult.getType() == HitResult.Type.ENTITY) {
-					double distance = hitResult.getPos().distanceTo(adjustedPos);
-					double inverseDistance = 1 / Math.max(0.0000000001, distance);
+					double distance = Math.max(0.1, hitResult.getPos().distanceTo(adjustedPos));
 					float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * nbtList.size() + (tag.getBoolean("Fireball") ? FireworkFrenzyConfig.fireballDamageBonus : 0);
 
 					// calculate damage falloff
@@ -140,12 +138,12 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 					if(target == directTarget)
 						target.damage(source, fireworkDamage);
 					else
-						target.damage(source, (float) Math.max(1, fireworkDamage * inverseDistance));
+						target.damage(source, (float) Math.max(1, fireworkDamage / distance));
 
 					if(FireworkFrenzyConfig.allowRocketJumping) {
-						double multiplier = (nbtList.size() * 0.4) * FireworkFrenzyConfig.rocketJumpMultiplier * knockbackAmount;
-						target.setVelocity(target.getVelocity().getX(), Math.min(1D, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());
-						target.setVelocity(target.getVelocity().add(adjustedTargetPos.subtract(adjustedPos)).multiply(inverseDistance * (target == getOwner() ? multiplier : multiplier * FireworkFrenzyConfig.otherEntityKnockBack)));
+						double multiplier = ((nbtList.size() + (tag.getBoolean("Fireball") ? 1 : 0)) * 0.3) * knockbackAmount * (target == getOwner() ? FireworkFrenzyConfig.rocketJumpMultiplier : FireworkFrenzyConfig.otherEntityKnockBack);
+						target.setVelocity(target.getVelocity().getX(), Math.min(1, Math.abs(target.getVelocity().getY())), target.getVelocity().getZ());
+						target.setVelocity(target.getVelocity().multiply(multiplier / distance));
 						target.velocityModified = true;
 					}
 				}
