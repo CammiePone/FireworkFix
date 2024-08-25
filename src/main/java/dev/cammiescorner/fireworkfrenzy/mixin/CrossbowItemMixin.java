@@ -34,7 +34,7 @@ public abstract class CrossbowItemMixin extends RangedWeaponItem {
 
 	@Inject(method = "usageTick", at = @At("TAIL"))
 	private void fireworkfrenzy$stopUsingItem(World world, LivingEntity user, ItemStack stack, int remainingUseTicks, CallbackInfo info) {
-		if(EnchantmentHelper.getLevel(FireworkFrenzy.AIR_STRIKE, stack) > 0 && jumper.isBlastJumping() && getPullProgress(getMaxUseTime(stack) - remainingUseTicks, stack) >= 1f) {
+		if(jumper != null && EnchantmentHelper.getLevel(FireworkFrenzy.AIR_STRIKE, stack) > 0 && jumper.isBlastJumping() && getPullProgress(getMaxUseTime(stack) - remainingUseTicks, stack) >= 1f) {
 			user.stopUsingItem();
 		}
 	}
