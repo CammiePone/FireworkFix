@@ -5,8 +5,8 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import dev.cammiescorner.fireworkfrenzy.FireworkFrenzy;
 import dev.cammiescorner.fireworkfrenzy.common.compat.ExplosiveEnhancementCompat;
-import dev.cammiescorner.fireworkfrenzy.common.entities.DamageCloudEntity;
 import dev.cammiescorner.fireworkfrenzy.common.compat.FireworkFrenzyConfig;
+import dev.cammiescorner.fireworkfrenzy.common.entities.DamageCloudEntity;
 import dev.cammiescorner.fireworkfrenzy.common.util.BlastJumper;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
@@ -26,12 +26,10 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.loader.api.QuiltLoader;
-import org.quiltmc.loader.impl.lib.sat4j.core.Vec;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -42,7 +40,10 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.*;
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 @Mixin(FireworkRocketEntity.class)
 public abstract class FireworkRocketEntityMixin extends ProjectileEntity implements FlyingItemEntity {
@@ -117,7 +118,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity impleme
 				HitResult hitResult = ProjectileUtil.raycast(this, adjustedPos, adjustedTargetPos, getBoundingBox().expand(blastSize), entity -> entity == target, adjustedPos.squaredDistanceTo(adjustedTargetPos));
 
 				if(hitResult != null && hitResult.getType() == HitResult.Type.ENTITY) {
-					double distance = Math.max(0.1, hitResult.getPos().distanceTo(adjustedPos));
+					double distance = Math.max(1, hitResult.getPos().distanceTo(adjustedPos));
 					float fireworkDamage = (target instanceof PlayerEntity ? FireworkFrenzyConfig.playerDamage : FireworkFrenzyConfig.mobDamage) * nbtList.size() + (tag.getBoolean("Fireball") ? FireworkFrenzyConfig.fireballDamageBonus : 0);
 
 					// calculate damage falloff
